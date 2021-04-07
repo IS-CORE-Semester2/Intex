@@ -1,9 +1,11 @@
 using Intex.Data;
+using Intex.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +14,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebPWrecover.Services;
 
 namespace Intex
 {
@@ -32,15 +35,21 @@ namespace Intex
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            ////allow for Google Authentication
+            //services.AddAuthentication().AddGoogle(options =>
+            //{
+            //    IConfigurationSection googleAuthNSection =
+            //    Configuration.GetSection("Authentication:Google");
+            //    options.ClientId = googleAuthNSection["ClientId"];
+            //    options.ClientSecret = googleAuthNSection["ClientSecret"];
+            //});
+
+            ////set up email verification sender
+            //services.AddTransient<IEmailSender, EmailSender>();
+            //services.Configure<AuthMessageSenderOptions>(Configuration);
+
             services.AddRazorPages();
-            //allow for Google Authentication
-            services.AddAuthentication().AddGoogle(options =>
-            {
-                IConfigurationSection googleAuthNSection =
-                Configuration.GetSection("Authentication:Google");
-                options.ClientId = googleAuthNSection["ClientId"];
-                options.ClientSecret = googleAuthNSection["ClientSecret"];
-            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
