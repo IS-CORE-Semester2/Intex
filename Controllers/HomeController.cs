@@ -1,4 +1,5 @@
 ﻿using Intex.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -18,16 +19,19 @@ namespace Intex.Controllers
             _logger = logger;
         }
 
+        //get request for home page
         public IActionResult Index()
         {
             return View();
         }
 
+        //get request for Burial Summary page
         public IActionResult BurialSummary()
         {
             return View();
         }
 
+        //get request for privacy page
         public IActionResult Privacy()
         {
             return View();

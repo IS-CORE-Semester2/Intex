@@ -1,0 +1,50 @@
+﻿@{
+    @model IEnumerable<IdentityRole>
+    ViewData["Title"] = "All Roles";
+}
+
+<h1>All Roles</h1>
+
+@*If there are any roles we have already created, show them!*@
+@if (Model.Any())
+{
+    @*Button to create a new role*@
+    <a class="btn btn-primary" style="width:auto" asp-controller="Administration" asp-action="CreateRole">Add New Role</a>
+    <br />
+
+    @*Loop to go through each role already created*@ 
+    foreach (var role in Model)
+    {
+        <div class="card mb-3">
+            @*print role ID (not editable)*@
+            <div class="card-header">
+                Role Id: @role.Id
+            </div>
+            @*Print role name*@
+            <div class="card-body">
+                <h5 class="card-title">@role.Name</h5>
+            </div>
+            @*Edit and delte role buttons*@
+            <div class="card-footer">
+                <a class="btn btn-warning" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit</a>
+                <a href="#" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    }
+}
+
+@*catch statement if no roles are in the DB yet.*@
+else
+{
+    <div class="card">
+        <div class="card-header">
+            No roles created yet
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">
+                Use the button below to create a role
+            </h5>
+            <a class="btn btn-primary" style="width:auto" asp-controller="Administration" asp-action="CreateRole">Add New Role</a>
+        </div>
+    </div>
+}

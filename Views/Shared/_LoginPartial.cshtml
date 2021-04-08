@@ -2,7 +2,9 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+@*Partial view to check whether a user is logged in or not*@
 <ul class="navbar-nav">
+@*if someone is logged int, show them their username and a logout option*@
 @if (SignInManager.IsSignedIn(User))
 {
     <li class="nav-item">
@@ -14,6 +16,8 @@
         </form>
     </li>
 }
+
+@*if no one is logged in, show a register or login option*@
 else
 {
     <li class="nav-item">

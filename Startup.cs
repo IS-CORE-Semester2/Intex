@@ -33,10 +33,30 @@ namespace Intex
             //connection string for Authentication/Identity
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            ////allow for Google Authentication
+            //##################################################################################################################
+            ////Role Based Identification
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
+            }).AddDefaultUI().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
+            //AddDefaultUI and AddDefaultTokenProviders are to fix weird errors I was getting when running
+
+            //code below can PROBABLY be deleted. I was having issues with the AddIdentity v AddDefaultIdentity, but i think those are fixed
+            //services.AddDefaultIdentity<IdentityUser>(options =>
+            //{
+            //    options.SignIn.RequireConfirmedAccount = true;
+            //    options.Password.RequireNonAlphanumeric = false;
+            //    options.Password.RequireDigit = false;
+            //    options.Password.RequireUppercase = false;
+            //}).AddEntityFrameworkStores<ApplicationDbContext>();
+            //##################################################################################################################
+
+            ////allow for Google Authentication 
+            ///NEED TO FIGURE OUT HOW TO PUT AND CONNECT A SECRETS VAULT ON AWS
             //services.AddAuthentication().AddGoogle(options =>
             //{
             //    IConfigurationSection googleAuthNSection =
@@ -45,6 +65,7 @@ namespace Intex
             //    options.ClientSecret = googleAuthNSection["ClientSecret"];
             //});
 
+            //DOES NOT CURRENTLY WORK BUT CAN BE CONFIGURED TO WORK IN THE FUTURE
             ////set up email verification sender
             //services.AddTransient<IEmailSender, EmailSender>();
             //services.Configure<AuthMessageSenderOptions>(Configuration);
@@ -71,6 +92,7 @@ namespace Intex
 
             app.UseRouting();
 
+            //allow us to authenticate users and authorize them to perform actions
             app.UseAuthentication();
             app.UseAuthorization();
 

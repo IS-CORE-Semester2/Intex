@@ -5,6 +5,7 @@ using SendGrid;
 using SendGrid.Helpers.Mail;
 using System.Threading.Tasks;
 
+//class to send an email if we get that working
 namespace WebPWrecover.Services
 {
     public class EmailSender : IEmailSender
