@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<IdentityUser> signInManager;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -25,6 +27,18 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="BurialSummary">Burial Summary</a>
                         </li>
+
+                        @*If a user is logged in AND they are an admin, give them access to the admin tab*@
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Manage</a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropownMenuLink">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Administration" asp-action="ListUsers">Users</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Administration" asp-action="ListRoles">Roles</a>
+                                </div>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
