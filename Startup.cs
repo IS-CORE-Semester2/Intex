@@ -1,4 +1,5 @@
 using Intex.Data;
+//using Intex.Models;
 using Intex.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -33,8 +34,25 @@ namespace Intex
             //connection string for Authentication/Identity
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            //##################################################################################################################
+            ////Role Based Identification
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.SignIn.RequireConfirmedAccount = true;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireUppercase = false;
+            }).AddDefaultUI().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
+
+            //services.AddDefaultIdentity<IdentityUser>(options =>
+            //{
+            //    options.SignIn.RequireConfirmedAccount = true;
+            //    options.Password.RequireNonAlphanumeric = false;
+            //    options.Password.RequireDigit = false;
+            //    options.Password.RequireUppercase = false;
+            //}).AddEntityFrameworkStores<ApplicationDbContext>();
+            //##################################################################################################################
 
             ////allow for Google Authentication
             //services.AddAuthentication().AddGoogle(options =>

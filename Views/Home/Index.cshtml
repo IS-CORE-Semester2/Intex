@@ -1,4 +1,7 @@
-﻿@{ ViewData["Title"] = "Home Page"; }
+﻿@{ 
+    ViewData["Title"] = "Home Page";
+    @inject SignInManager<IdentityUser> signInManager;
+}
 
 
 @*I think I'll want to put these in cards or something to make it more appealing*@
@@ -19,3 +22,11 @@
     <img class="img-fluid rounded" src="~/img/Overhead Shot.jpg" />
     <img class="img-fluid rounded" src="~/img/Overhead Shot BW.jpg" />
 </div>
+
+
+@if (signInManager.IsSignedIn(User))
+{
+    <p>you will only see this if you are signed in</p>
+    @*Don't forget this statement at the top to make this work*@
+    @*    @inject SignInManager<IdentityUser> signInManager;    *@
+}

@@ -1,4 +1,5 @@
 ﻿using Intex.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -23,7 +24,13 @@ namespace Intex.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult BurialSummary()
+        {
+            return View();
+        }
+
+        public IActionResult DontForgetStuff()
         {
             return View();
         }
