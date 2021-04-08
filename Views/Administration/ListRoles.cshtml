@@ -11,8 +11,9 @@
     @*Button to create a new role*@
     <a class="btn btn-primary" style="width:auto" asp-controller="Administration" asp-action="CreateRole">Add New Role</a>
     <br />
+    <br />
 
-    @*Loop to go through each role already created*@ 
+    @*Loop to go through each role already created*@
     foreach (var role in Model)
     {
         <div class="card mb-3">
@@ -24,11 +25,26 @@
             <div class="card-body">
                 <h5 class="card-title">@role.Name</h5>
             </div>
-            @*Edit and delte role buttons*@
-            <div class="card-footer">
+
+            @*Edit and delete role buttons*@
+            @*Form used for delete request to guard against "get request" having ability to delete roles*@
+        <div class="card-footer">
+            <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
                 <a class="btn btn-warning" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit</a>
-                <a href="#" class="btn btn-danger">Delete</a>
-            </div>
+                <span id="confirmDeleteSpan_@role.Id" style="display:none">
+                    <span>Are you sure you want to delete?</span>
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                    <a href="#" class="btn btn-primary"
+                       onclick="confirmDelete('@role.Id', false)">No</a>
+                </span>
+
+                <span id="deleteSpan_@role.Id">
+                    <a href="#" class="btn btn-danger"
+                       onclick="confirmDelete('@role.Id', true)">Delete</a>
+                </span>
+            </form>
+        </div>
+
         </div>
     }
 }
@@ -47,4 +63,9 @@ else
             <a class="btn btn-primary" style="width:auto" asp-controller="Administration" asp-action="CreateRole">Add New Role</a>
         </div>
     </div>
+}
+
+@*Pull in JS for confirm delete*@
+@section Scripts {
+    <script src="~/js/CustomScript.js"></script>
 }

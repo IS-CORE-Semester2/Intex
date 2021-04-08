@@ -1,7 +1,10 @@
 ﻿//using Intex.Models;
 using Intex.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,15 +12,211 @@ using System.Threading.Tasks;
 
 namespace Intex.Controllers
 {
+    //Only allow authorized ADMINS to access actions in this controller
+    [Authorize(Roles = "Admin")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<IdentityUser> userManager;
+        private readonly ILogger<AdministrationController> logger;
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager, ILogger<AdministrationController> logger)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
+            this.logger = logger;
+        }
+
+        //post request to delete a user from the DB
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            //get the user that we want to delete from the DB
+            var user = await userManager.FindByIdAsync(id);
+
+            //send an error page if the user doesn't exist
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+
+            //use an async method to delete the selected user from the DB 
+            else
+            {
+                var result = await userManager.DeleteAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View("ListUsers");
+            }
+        }
+
+        //Get Request to edit the roles a specific user is part of
+        [HttpGet]
+        public async Task<IActionResult> ManageUserRoles(string userId)
+        {
+            //Get the userId that was passed through the route
+            ViewBag.userId = userId;
+
+            //get the user from the DB based on the Id
+            var user = await userManager.FindByIdAsync(userId);
+
+            //send custom error page if null
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
+                return View("NotFound");
+            }
+
+            //make a list and store it in "model"
+            var model = new List<UserRolesViewModel>();
+
+            //loop through each role that a user has and put it in the "model" object
+            foreach (var role in roleManager.Roles)
+            {
+                var userRolesViewModel = new UserRolesViewModel
+                {
+                    RoleId = role.Id,
+                    RoleName = role.Name
+                };
+
+                if (await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRolesViewModel.IsSelected = true;
+                }
+                else
+                {
+                    userRolesViewModel.IsSelected = false;
+                }
+
+                model.Add(userRolesViewModel);
+            }
+
+            return View(model);
+        }
+
+        //post action to update the roles (checked or unchecked) of a specific user
+        [HttpPost]
+        public async Task<IActionResult> ManageUserRoles(List<UserRolesViewModel> model, string userId)
+        {
+            //get the user from the DB based on Id
+            var user = await userManager.FindByIdAsync(userId);
+
+            //send error page if null
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {userId} cannot be found";
+                return View("NotFound");
+            }
+
+            //get list of all roles that the User selected belongs to
+            var roles = await userManager.GetRolesAsync(user);
+
+            //remove ALL roles from the user. Even if they are meant to keep them. They will be added back later on
+            var result = await userManager.RemoveFromRolesAsync(user, roles);
+
+            //error message for end user to see if errors happen when trying to remove roles from user
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Cannot remove user existing roles");
+                return View(model);
+            }
+
+            //add the specific roles that the user needs to have on their account
+            result = await userManager.AddToRolesAsync(user, model.Where(x => x.IsSelected).Select(y => y.RoleName));
+
+            //error in case any roles cannot be added
+            if (!result.Succeeded)
+            {
+                ModelState.AddModelError("", "Cannot add selected roles to user");
+                return View(model);
+            }
+
+            //send back the edit user page for the user that was already selected
+            return RedirectToAction("EditUser", new { Id = userId });
+        }
+
+        //get request to list all users
+        [HttpGet]
+        public IActionResult ListUsers()
+        {
+            var users = userManager.Users;
+            return View(users);
+        }
+
+        //get request to edit a specific user
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            //get the selected user from the database by his/her Id
+            var user = await userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+
+            //returns list of all claims and all roles of the user that is passed as a parameter
+            var userClaims = await userManager.GetClaimsAsync(user);
+            var userRoles = await userManager.GetRolesAsync(user);
+
+            //prepare a model to send to the next page. Model will hold properties about the user you are editing
+            var model = new EditUserViewModel
+            {
+                Id = user.Id,
+                Email = user.Email,
+                UserName = user.UserName,
+                Claims = userClaims.Select(c => c.Value).ToList(),
+                Roles = userRoles
+            };
+
+            return View(model);
+        }
+
+        //Post request to edit the user that the user was previously editing
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserViewModel model)
+        {
+            //get the user based on his Id from the DB
+            var user = await userManager.FindByIdAsync(model.Id);
+
+            //Send an error page is something is wrong
+            if (user == null)
+            {
+                ViewBag.ErrorMessage = $"User with Id = {model.Id} cannot be found";
+                return View("NotFound");
+            }
+
+            //update the user's information in the DB
+            else
+            {
+                user.Email = model.Email;
+                user.UserName = model.UserName;
+
+                var result = await userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View(model);
+            }
         }
 
         //get request to create a new role
@@ -173,7 +372,6 @@ namespace Intex.Controllers
             }
             //send the view with emails and checkboxes for people who are part of a role
             return View(model);
-
         }
 
         //action to send user role update to database
@@ -229,5 +427,50 @@ namespace Intex.Controllers
             //send a redirect to the "Edit Role" page for the user to start over after their changes are updated
             return RedirectToAction("EditRole", new { Id = roleId });
         }
+
+        //Post request to delete a role from the DB
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Role with Id = {id} cannot be found";
+                return View("NotFound");
+            }
+            else
+            {
+                //create custom error message for DB errors
+                try
+                {
+                    var result = await roleManager.DeleteAsync(role);
+
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("ListRoles");
+                    }
+
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+
+                    return View("ListRoles");
+                }
+
+                //log error and send custom error validation
+                catch(DbUpdateException ex)
+                {
+                    logger.LogError($"Error deleting role {ex}");
+
+                    ViewBag.ErrorTitle = $"{role.Name} role is in use";
+                    ViewBag.ErrorMessage = $"{role.Name} role cannot be deleted as there are users in this role. If you want to delete this role, please remove the users from the role and then try to delete";
+                    return View("Error");
+                }
+
+            }
+        }
+
     }
 }
