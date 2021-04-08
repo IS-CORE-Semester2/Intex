@@ -1,5 +1,4 @@
 using Intex.Data;
-//using Intex.Models;
 using Intex.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,7 +43,9 @@ namespace Intex
                 options.Password.RequireDigit = false;
                 options.Password.RequireUppercase = false;
             }).AddDefaultUI().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
+            //AddDefaultUI and AddDefaultTokenProviders are to fix weird errors I was getting when running
 
+            //code below can PROBABLY be deleted. I was having issues with the AddIdentity v AddDefaultIdentity, but i think those are fixed
             //services.AddDefaultIdentity<IdentityUser>(options =>
             //{
             //    options.SignIn.RequireConfirmedAccount = true;
@@ -54,7 +55,8 @@ namespace Intex
             //}).AddEntityFrameworkStores<ApplicationDbContext>();
             //##################################################################################################################
 
-            ////allow for Google Authentication
+            ////allow for Google Authentication 
+            ///NEED TO FIGURE OUT HOW TO PUT AND CONNECT A SECRETS VAULT ON AWS
             //services.AddAuthentication().AddGoogle(options =>
             //{
             //    IConfigurationSection googleAuthNSection =
@@ -63,6 +65,7 @@ namespace Intex
             //    options.ClientSecret = googleAuthNSection["ClientSecret"];
             //});
 
+            //DOES NOT CURRENTLY WORK BUT CAN BE CONFIGURED TO WORK IN THE FUTURE
             ////set up email verification sender
             //services.AddTransient<IEmailSender, EmailSender>();
             //services.Configure<AuthMessageSenderOptions>(Configuration);
@@ -89,6 +92,7 @@ namespace Intex
 
             app.UseRouting();
 
+            //allow us to authenticate users and authorize them to perform actions
             app.UseAuthentication();
             app.UseAuthorization();
 

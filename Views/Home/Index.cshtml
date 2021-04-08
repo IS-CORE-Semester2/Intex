@@ -3,27 +3,29 @@
     @inject SignInManager<IdentityUser> signInManager;
 }
 
-
-@*I think I'll want to put these in cards or something to make it more appealing*@
+@*Generic welcome*@
+@*XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX Kinda ugly rn. make cuter XXXXXXXXXXXXXXXXXXXXXXXXXXXX*@
 <div class="text-center">
     <h1 class="display-4">Welcome to BYU's Fag el-Gamous Project</h1>
     <p>Fag el-Gamous (which means Way of the Water Buffalo) is a large and important cemetery in Egypt that has been under archeological investigation (primarily by BYU researchers) for over 25 years. The excavation has garnered international attention because of the interesting insights gained by studying the Fag el-Gamous mummies. Detailed background information on this site can be found in the academic article <a href="https://www-sciencedirect-com.erl.lib.byu.edu/science/article/pii/S2352409X15000188">“Rethinking burial dates at a Graeco-Roman Cemetery: Fag el-Gamous, Fayoum, Egypt.”</a></p>
     <p>During multiple years of study, researchers have excavated more than 1,000 mummies and collected data in field notes, spreadsheets, and simple databases about each mummy’s location, physical orientation in the ground, burial depth, hair color, wrapping (including information about the textiles used), gender, age, bone (including skull and teeth) dimensions, items accompanying the mummy, and more. And, of course, there are many, many photographs. Offsite, researchers have performed a variety of analyses on the items excavated including carbon dating, DNA sequencing, and others.</p>
 </div>
 
+@*Button to take user to Burial Information*@
 <div class="text-center">
     <a class="btn btn-primary btn-lg" asp-action="BurialSummary">View Burial Information</a>
 </div>
 
 <br />
 
+@*Show some pictures of the area from above*@
 <div class="text-center">
     <h2>Here's what the area looks like from above:</h2>
     <img class="img-fluid rounded" src="~/img/Overhead Shot.jpg" />
     <img class="img-fluid rounded" src="~/img/Overhead Shot BW.jpg" />
 </div>
 
-
+@*Example of how to show something on a page ONLY to an authenticated user*@
 @if (signInManager.IsSignedIn(User))
 {
     <p>you will only see this if you are signed in</p>

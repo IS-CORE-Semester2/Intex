@@ -19,22 +19,19 @@ namespace Intex.Controllers
             _logger = logger;
         }
 
+        //get request for home page
         public IActionResult Index()
         {
             return View();
         }
 
-        [Authorize]
+        //get request for Burial Summary page
         public IActionResult BurialSummary()
         {
             return View();
         }
 
-        public IActionResult DontForgetStuff()
-        {
-            return View();
-        }
-
+        //get request for privacy page
         public IActionResult Privacy()
         {
             return View();
