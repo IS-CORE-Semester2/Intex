@@ -12,5 +12,8 @@ namespace Intex.Data
             : base(options)
         {
         }
+
+        //Put Burial DB in here
+        //public DbSet<Burial> Burials { get; set; }
     }
 }
