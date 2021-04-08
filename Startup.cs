@@ -31,10 +31,8 @@ namespace Intex
         public void ConfigureServices(IServiceCollection services)
         {
             //connection string for Authentication/Identity
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            //##################################################################################################################
             ////Role Based Identification
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
             {
@@ -45,14 +43,7 @@ namespace Intex
             }).AddDefaultUI().AddDefaultTokenProviders().AddEntityFrameworkStores<ApplicationDbContext>();
             //AddDefaultUI and AddDefaultTokenProviders are to fix weird errors I was getting when running
 
-            //code below can PROBABLY be deleted. I was having issues with the AddIdentity v AddDefaultIdentity, but i think those are fixed
-            //services.AddDefaultIdentity<IdentityUser>(options =>
-            //{
-            //    options.SignIn.RequireConfirmedAccount = true;
-            //    options.Password.RequireNonAlphanumeric = false;
-            //    options.Password.RequireDigit = false;
-            //    options.Password.RequireUppercase = false;
-            //}).AddEntityFrameworkStores<ApplicationDbContext>();
+
             //##################################################################################################################
 
             ////allow for Google Authentication 
@@ -65,7 +56,10 @@ namespace Intex
             //    options.ClientSecret = googleAuthNSection["ClientSecret"];
             //});
 
-            //DOES NOT CURRENTLY WORK BUT CAN BE CONFIGURED TO WORK IN THE FUTURE
+            //##################################################################################################################
+            
+            
+            //EMAIL SENDER DOES NOT CURRENTLY WORK BUT CAN BE CONFIGURED TO WORK IN THE FUTURE
             ////set up email verification sender
             //services.AddTransient<IEmailSender, EmailSender>();
             //services.Configure<AuthMessageSenderOptions>(Configuration);
