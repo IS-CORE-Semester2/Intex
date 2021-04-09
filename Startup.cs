@@ -1,4 +1,5 @@
 using Intex.Data;
+using Intex.Models;
 using Intex.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,6 +31,9 @@ namespace Intex
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //this is for scaffolding
+            services.AddDbContext<BurialsDbContext>();
+
             //connection string for Authentication/Identity
             services.AddDbContextPool<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 

@@ -1,0 +1,19 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace Intex.Models
+{
+    public class BurialsDbContext: DbContext
+	{
+		public BurialsDbContext(DbContextOptions<BurialsDbContext> options) : base(options)
+		{
+
+		}
+		protected override void OnConfiguring(DbContextOptionsBuilder options)
+	=> options.UseSqlServer("DataSource=QuoteDatabase.sqlite");
+		public DbSet<Burials> Burials { get; set; }
+	}
+}
