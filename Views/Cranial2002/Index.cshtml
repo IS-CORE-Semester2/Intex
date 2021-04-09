@@ -1,0 +1,150 @@
+﻿@model IEnumerable<Intex.Cranial2002>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaximumCranialLength)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaximumCranialBreadth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BasionBreg)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BasionNasion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BasionProsthionLength)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BizygomaticDiameter)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NasionProsthion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MaximumNasalBreadth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.InterorbitalBreadth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BurialPositioningNorthSouthNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BurialPositioningNorthSouthDirection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BurialPositioningEastWestNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BurialPositioningEastWestDirection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BurialNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BurialDepth)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BurialSubPlotDirection)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BurialArtifactDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BuriedWithArtifacts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GilesGender)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BodyGender)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaximumCranialLength)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaximumCranialBreadth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BasionBreg)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BasionNasion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BasionProsthionLength)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BizygomaticDiameter)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NasionProsthion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaximumNasalBreadth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.InterorbitalBreadth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialPositioningNorthSouthNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialPositioningNorthSouthDirection)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialPositioningEastWestNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialPositioningEastWestDirection)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialDepth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialSubPlotDirection)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialArtifactDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BuriedWithArtifacts)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GilesGender)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BodyGender)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.SampleNumber">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.SampleNumber">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.SampleNumber">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

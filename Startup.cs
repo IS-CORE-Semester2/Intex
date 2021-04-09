@@ -34,6 +34,8 @@ namespace Intex
             //this is for scaffolding
             services.AddDbContext<BurialsDbContext>();
             services.AddDbContext<BioSamplesDbContext>();
+            services.AddDbContext<Cranial2002DbContext>();
+            services.AddDbContext<OracleSpreadDbContext>();
 
             //connection string for Authentication/Identity
             services.AddDbContextPool<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
