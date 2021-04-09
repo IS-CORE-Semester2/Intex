@@ -37,19 +37,11 @@
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
-                    @*In the future we should uncomment this code below and use the services like they are meant to be use*@
-                    @*<div>
+                    <div>
                         <p>
                             There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
                             for details on setting up this ASP.NET application to support logging in via external services.
                         </p>
-                    </div>*@
-
-                    <div class="col-md-6">
-                        <a href="#"><img src="~/img/Logo_BYU.png" class="rounded" style="max-width:100px" /></a>
-                        <a href="#"><img src="~/img/Logo_Google.png" class="rounded" style="max-width:100px" /></a>
-                        <a href="#"><img src="~/img/Logo_Facebook.png" class="rounded" style="max-width:100px" /></a>
-                        <a href="#"><img src="~/img/Logo_Apple.png" class="rounded" style="max-width:100px" /></a>
                     </div>
                 }
                 else
