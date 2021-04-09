@@ -8,7 +8,7 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-success m-1">Add New Entry</a>
 </p>
 <table class="table">
     <thead>
@@ -30,45 +30,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Burialnum)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Westtohead)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Westtofeet)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Southtohead)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Southtofeet)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Depth)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Preservation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Burialicon)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sex)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sexmethod)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Ageatdeath)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Agemethod)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Haircolor)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sample)
             </th>
             <th></th>
         </tr>
@@ -95,48 +56,9 @@
                 @Html.DisplayFor(modelItem => item.Burialnum)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Westtohead)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Westtofeet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Southtohead)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Southtofeet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Depth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Preservation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Burialicon)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sex)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sexmethod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Ageatdeath)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Agemethod)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Haircolor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sample)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Gamous">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Gamous">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Gamous">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.Gamous" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
+                <a asp-action="Details" asp-route-id="@item.Gamous" class="btn btn-info m-1" style="width: 80px">Details</a>
+                <a asp-action="Delete" asp-route-id="@item.Gamous" class="btn btn-danger m-1" style="width: 80px">Delete</a>
             </td>
         </tr>
 }

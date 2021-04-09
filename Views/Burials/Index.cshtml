@@ -5,31 +5,31 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Burial Entries</h1>
 
 <p>
-    <a asp-action="Create">Add New Entry</a>
+    <a asp-action="Create" class="btn btn-success m-1">Add New Entry</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BurialNumber)
+                Burial Number
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BurialLocation)
+                Burial Location
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BurialDepth)
+                Burial Depth
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BurialSituation)
+                Burial Situation
             </th>
             <th>
                 Date Found
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HeadDirection)
+                Head Direction
             </th>
             <th></th>
         </tr>
