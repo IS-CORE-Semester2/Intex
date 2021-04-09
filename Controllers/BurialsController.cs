@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex;
 using Intex.Models;
+using Intex.ViewModels;
 
 namespace Intex.Controllers
 {
@@ -20,9 +21,45 @@ namespace Intex.Controllers
         }
 
         // GET: Burials
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    return View(await _context.Burials.ToListAsync());
+        //}
+
+
+        public IActionResult Index(int pageNum = 1)
+         //public IActionResult Index(long? mealtypeid, string mealtype, int pageNum = 0) //used for filtering I think
         {
-            return View(await _context.Burials.ToListAsync());
+            int pageSize = 10;
+
+            return View(new IndexViewModel
+            {
+                //used for filtering
+                //Recipes = context.Recipes
+                //    .Where(m => m.RecipeClassId == mealtypeid || mealtypeid == null)
+                //    .OrderBy(m => m.RecipeTitle)
+                //    .Skip((pageNum - 1) * pageSize)
+                //    .Take(pageSize)
+                //    .ToList(),
+
+                Burials = _context.Burials
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList(),
+
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = pageNum,
+                    ItemsPerPage = pageSize,
+                    //if no meal has been selected, get the full count.
+                    //else, if a meal has been selected, get the count for the selected meal type
+                    //TotalNumItems = (mealtypeid == null ? context.Recipes.Count() : context.Recipes.Where(x => x.RecipeClassId == mealtypeid).Count())
+                    TotalNumItems = (_context.Burials.Count())
+                },
+
+                //filtering I think
+                //Type = mealtype
+            });
         }
 
         // GET: Burials/Details/5
