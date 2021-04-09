@@ -26,5 +26,8 @@ namespace Intex
         public string PreviouslySampled { get; set; }
         public string Notes { get; set; }
         public string Initials { get; set; }
+        public int? BurialId { get; set; }
+
+        public virtual Burials Burial { get; set; }
     }
 }

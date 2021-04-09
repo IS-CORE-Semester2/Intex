@@ -32,7 +32,7 @@ namespace Intex.Controllers
         //get request for Burial Summary page
         public IActionResult BurialSummary()
         {
-            return View();
+            return View(_context.Burials);
         }
 
         //get request for privacy page

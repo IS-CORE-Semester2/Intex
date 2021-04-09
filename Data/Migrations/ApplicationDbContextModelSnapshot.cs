@@ -29,6 +29,9 @@ namespace Intex.Data.Migrations
                     b.Property<string>("BagNumber")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("BurialId")
+                        .HasColumnType("int");
+
                     b.Property<string>("BurialLocationEw")
                         .HasColumnType("nvarchar(max)");
 
@@ -70,12 +73,14 @@ namespace Intex.Data.Migrations
 
                     b.HasKey("BioSampleId");
 
+                    b.HasIndex("BurialId");
+
                     b.ToTable("BioSamples");
                 });
 
             modelBuilder.Entity("Intex.Burials", b =>
                 {
-                    b.Property<int>("MainId")
+                    b.Property<int>("BurialId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -110,7 +115,7 @@ namespace Intex.Data.Migrations
                     b.Property<decimal?>("BurialDepth")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("BurialIdOld")
+                    b.Property<string>("BurialLocation")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("BurialLocationEw")
@@ -302,7 +307,7 @@ namespace Intex.Data.Migrations
                     b.Property<int?>("ZygomaticCrest")
                         .HasColumnType("int");
 
-                    b.HasKey("MainId");
+                    b.HasKey("BurialId");
 
                     b.ToTable("Burials");
                 });
@@ -501,6 +506,14 @@ namespace Intex.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("Intex.BioSamples", b =>
+                {
+                    b.HasOne("Intex.Burials", "Burial")
+                        .WithMany()
+                        .HasForeignKey("BurialId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
