@@ -1,77 +1,99 @@
-﻿@model IEnumerable<Intex.Burials>
+﻿@model IndexViewModel
+@inject SignInManager<IdentityUser> signInManager;
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Burial data from our previous expeditions</h1>
 
-<p>
-    <a asp-action="Create">Add New Entry</a>
-</p>
+@if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+{
+    <a class="btn btn-primary" asp-action="Create">Add New Entry</a>
+    <br />
+}
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.BurialNumber)
+                BurialNumber
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BurialLocation)
+                BurialLocation
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BurialDepth)
+                BurialDepth
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BurialSituation)
+                BurialSituation
             </th>
             <th>
                 Date Found
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HeadDirection)
+                HeadDirection
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialLocation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialDepth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialSituation)
-            </td>
-            <td>
-                @if (Html.DisplayFor(modelItem => item.DayFound) == null && Html.DisplayFor(modelItem => item.MonthFound) == null)
-                {
-                    @Html.DisplayFor(modelItem => item.YearFound)
-                }
-                @if (Html.DisplayFor(modelItem => item.DayFound) == null && Html.DisplayFor(modelItem => item.MonthFound) != null)
-                {
-                    @Html.DisplayFor(modelItem => item.MonthFound) @Html.DisplayFor(modelItem => item.YearFound)
-                }
-                @if (Html.DisplayFor(modelItem => item.DayFound) != null)
-                {
-                    @Html.DisplayFor(modelItem => item.MonthFound); @Html.DisplayFor(modelItem => item.DayFound); @Html.DisplayFor(modelItem => item.YearFound)
-                }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HeadDirection)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BurialId" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
-                <a asp-action="Details" asp-route-id="@item.BurialId" class="btn btn-info m-1" style="width: 80px">Details</a>
-                <a asp-action="Delete" asp-route-id="@item.BurialId" class="btn btn-danger m-1" style="width: 80px">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Burials)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialLocation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialDepth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialSituation)
+                </td>
+                <td>
+                    @if (Html.DisplayFor(modelItem => item.DayFound) == null && Html.DisplayFor(modelItem => item.MonthFound) == null)
+                    {
+                        @Html.DisplayFor(modelItem => item.YearFound)
+                    }
+                    @if (Html.DisplayFor(modelItem => item.DayFound) == null && Html.DisplayFor(modelItem => item.MonthFound) != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.MonthFound) @Html.DisplayFor(modelItem => item.YearFound)
+                    }
+                    @if (Html.DisplayFor(modelItem => item.DayFound) != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.MonthFound); @Html.DisplayFor(modelItem => item.DayFound); @Html.DisplayFor(modelItem => item.YearFound)
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HeadDirection)
+                </td>
+                <td>
+                    @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.BurialId" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
+                    }
+
+                    <a asp-action="Details" asp-route-id="@item.BurialId" class="btn btn-info m-1" style="width: 80px">Details</a>
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.BurialId" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                    }
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<div class="text-center">
+    <div page-model="@Model.PagingInfo"
+         page-classes-enabled="true"
+         page-class="btn"
+         page-class-normal="btn-outline-dark"
+         page-class-selected="btn-primary"
+         class="btn-group pull-right m-1"></div>
+</div>
+
