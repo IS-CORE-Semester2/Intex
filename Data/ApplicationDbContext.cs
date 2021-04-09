@@ -14,8 +14,9 @@ namespace Intex.Data
             : base(options)
         { }
 
-        //Put Burial DB in here
-        //public DbSet<Burial> Burials { get; set; }
+        //Bring in sets of Burials and BioSamples
+        public DbSet<Burials> Burials { get; set; }
+        public DbSet<BioSamples> BioSamples { get; set; }
 
 
         //Change default SQL behavior from cascading deletion to "no action"

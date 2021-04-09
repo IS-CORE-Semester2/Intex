@@ -14,9 +14,6 @@ namespace Intex.Controllers
     public class HomeController : Controller
     {
         //pull in DBContext and stuff here
-
-
-
         private readonly ILogger<HomeController> _logger;
         private ApplicationDbContext _context;
 
