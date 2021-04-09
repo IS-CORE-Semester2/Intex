@@ -17,6 +17,8 @@ namespace Intex.Data
         //Bring in sets of Burials and BioSamples
         public DbSet<Burials> Burials { get; set; }
         public DbSet<BioSamples> BioSamples { get; set; }
+        public DbSet<OracleSpread> OracleSpreads { get; set; }
+        public DbSet<Cranial2002> Cranial2002s { get; set; }
 
 
         //Change default SQL behavior from cascading deletion to "no action"

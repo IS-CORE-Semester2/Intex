@@ -31,5 +31,8 @@ namespace Intex
         public string Agemethod { get; set; }
         public string Haircolor { get; set; }
         public bool? Sample { get; set; }
+
+        public virtual Burials Burial { get; set; }
+
     }
 }

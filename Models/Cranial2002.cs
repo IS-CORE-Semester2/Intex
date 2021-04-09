@@ -32,5 +32,7 @@ namespace Intex
         public bool? BuriedWithArtifacts { get; set; }
         public string GilesGender { get; set; }
         public string BodyGender { get; set; }
+        public virtual Burials Burial { get; set; }
+
     }
 }
