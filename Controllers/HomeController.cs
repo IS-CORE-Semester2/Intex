@@ -1,4 +1,5 @@
-﻿using Intex.Models;
+﻿using Intex.Data;
+using Intex.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -13,14 +14,16 @@ namespace Intex.Controllers
     public class HomeController : Controller
     {
         //pull in DBContext and stuff here
-        //#########################################################################
+
 
 
         private readonly ILogger<HomeController> _logger;
+        private ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ApplicationDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         //get request for home page
