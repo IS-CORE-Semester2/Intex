@@ -37,11 +37,19 @@
             @{
                 if ((Model.ExternalLogins?.Count ?? 0) == 0)
                 {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
+                    @*In the future we would want to uncomment this section. I'm just showing the possiblility of how we could implement other logins*@
+                    @*<div>
+                    <p>
+                        There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
+                        for details on setting up this ASP.NET application to support logging in via external services.
+                    </p>
+                </div>*@
+
+                    <div class="col-md-6">
+                        <a href="#"><img src="~/img/BYU_logo.png" class="rounded" style="max-width:100px" /></a>
+                        <a href="#"><img src="~/img/Google_logo.png" class="rounded" style="max-width:100px" /></a>
+                        <a href="#"><img src="~/img/Facebook_logo.png" class="rounded" style="max-width:100px" /></a>
+                        <a href="#"><img src="~/img/Apple_logo.png" class="rounded" style="max-width:100px" /></a>
                     </div>
                 }
                 else
