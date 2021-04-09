@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Intex.BioSamples>
+@inject SignInManager<IdentityUser> signInManager;
 
 @{
     ViewData["Title"] = "Index";
@@ -7,114 +8,118 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+@if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+{
+    <a class="btn btn-success m-1" asp-action="Create">Add New Entry</a>
+    <br />
+}
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.RackNumber)
+                Rack Number
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BagNumber)
+                Bag Number
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LowPairNs)
+                Low Pair Ns
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HighPairNs)
+                High Pair Ns
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BurialLocationNs)
+                Burial Location Ns
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LowPairEw)
+                Low Pair Ew
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.HighPairEw)
+                High Pair Ew
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BurialLocationEw)
+                Burial Location Ew
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BurialSubplot)
+                Burial Subplot
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.BurialNumber)
+                Burial Number
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Date)
+                Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PreviouslySampled)
+                Previously Sampled
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Notes)
+                Notes
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Initials)
+                Initials
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Burial)
+                Burial
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.RackNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BagNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LowPairNs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HighPairNs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialLocationNs)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LowPairEw)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HighPairEw)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialLocationEw)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialSubplot)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Date)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PreviouslySampled)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Initials)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Burial.BurialId)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BioSampleId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BioSampleId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BioSampleId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RackNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BagNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LowPairNs)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HighPairNs)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialLocationNs)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LowPairEw)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.HighPairEw)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialLocationEw)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialSubplot)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PreviouslySampled)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Notes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Initials)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Burial.BurialId)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.BurialId" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.BurialId" class="btn btn-info m-1" style="width: 80px">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.BurialId" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -6,11 +6,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Burial data from our previous expeditions</h1>
+<h1>Burial Entries</h1>
 
 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
 {
-    <a class="btn btn-primary" asp-action="Create">Add New Entry</a>
+    <a class="btn btn-success m-1" asp-action="Create">Add New Entry</a>
     <br />
 }
 
@@ -18,22 +18,22 @@
     <thead>
         <tr>
             <th>
-                BurialNumber
+                Burial Number
             </th>
             <th>
-                BurialLocation
+                Burial Location
             </th>
             <th>
-                BurialDepth
+                Burial Depth
             </th>
             <th>
-                BurialSituation
+                Burial Situation
             </th>
             <th>
                 Date Found
             </th>
             <th>
-                HeadDirection
+                Head Direction
             </th>
             <th></th>
         </tr>
