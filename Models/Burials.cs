@@ -11,8 +11,8 @@ namespace Intex
     public partial class Burials
     {
         [Key]
-        public int MainId { get; set; }
-        public string BurialIdOld { get; set; }
+        public int BurialId { get; set; }
+        public string BurialLocation { get; set; }
         public string BurialLocationNs { get; set; }
         public string BurialLocationEw { get; set; }
         public int? LowPairNs { get; set; }

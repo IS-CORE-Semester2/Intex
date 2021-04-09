@@ -1,5 +1,6 @@
-﻿@{
+﻿@{ 
     ViewData["Title"] = "Burial List";
+    @model IEnumerable<Burials>
 }
 
 @*obviously gonna have to change some of the wording*@
@@ -21,3 +22,8 @@
 </ul>
 
 
+
+@foreach (var m in Model)
+{
+<p>@m.BurialId</p>
+}
