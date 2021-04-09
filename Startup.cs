@@ -31,7 +31,7 @@ namespace Intex
         public void ConfigureServices(IServiceCollection services)
         {
             //connection string for Authentication/Identity
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContextPool<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             ////Role Based Identification
             services.AddIdentity<IdentityUser, IdentityRole>(options =>

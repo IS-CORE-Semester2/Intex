@@ -15,7 +15,7 @@ namespace Intex.Data
         { }
 
         //Put Burial DB in here
-        public DbSet<Burial> Burials { get; set; }
+        //public DbSet<Burial> Burials { get; set; }
 
 
         //Change default SQL behavior from cascading deletion to "no action"
