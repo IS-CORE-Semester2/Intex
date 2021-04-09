@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<Intex.Cranial2002>
+@inject SignInManager<IdentityUser> signInManager;
 
 @{
     ViewData["Title"] = "Index";
@@ -7,9 +8,12 @@
 
 <h1>Index</h1>
 
-<p>
-    <a asp-action="Create" class="btn btn-success m-1">Add New Entry</a>
-</p>
+@if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+{
+    <a class="btn btn-success m-1" asp-action="Create">Add New Entry</a>
+    <br />
+}
+
 <table class="table">
     <thead>
         <tr>
@@ -77,74 +81,75 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaximumCranialLength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaximumCranialBreadth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BasionBreg)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BasionNasion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BasionProsthionLength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BizygomaticDiameter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NasionProsthion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaximumNasalBreadth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.InterorbitalBreadth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialPositioningNorthSouthNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialPositioningNorthSouthDirection)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialPositioningEastWestNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialPositioningEastWestDirection)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialDepth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialSubPlotDirection)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialArtifactDescription)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BuriedWithArtifacts)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.GilesGender)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BodyGender)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.SampleNumber" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
-                <a asp-action="Details" asp-route-id="@item.SampleNumber" class="btn btn-info m-1" style="width: 80px">Details</a>
-                <a asp-action="Delete" asp-route-id="@item.SampleNumber" class="btn btn-danger m-1" style="width: 80px">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaximumCranialLength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaximumCranialBreadth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasionBreg)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasionNasion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BasionProsthionLength)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BizygomaticDiameter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NasionProsthion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MaximumNasalBreadth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.InterorbitalBreadth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialPositioningNorthSouthNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialPositioningNorthSouthDirection)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialPositioningEastWestNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialPositioningEastWestDirection)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialDepth)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialSubPlotDirection)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialArtifactDescription)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BuriedWithArtifacts)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GilesGender)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BodyGender)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.SampleNumber" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
+                    <a asp-action="Details" asp-route-id="@item.SampleNumber" class="btn btn-info m-1" style="width: 80px">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.SampleNumber" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
