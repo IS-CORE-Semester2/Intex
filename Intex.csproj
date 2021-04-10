@@ -11,6 +11,22 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\pdf\Archaeological Database Articles\Canmore Scottish Heritage database.pdf" />
+    <None Include="wwwroot\pdf\Archaeological Database Articles\CSA Newsletter, Spring, 2007_ The Arachne Object-database.pdf" />
+    <None Include="wwwroot\pdf\Archaeological Database Articles\neareastarch.77.3.0198.pdf" />
+    <None Include="wwwroot\pdf\Archaeological Database Articles\neareastarch.77.3.0204.pdf" />
+    <None Include="wwwroot\pdf\Archaeological Database Articles\Schloen -- OCHRE - An Online Cultural and Historical Research Environment.pdf" />
+    <None Include="wwwroot\pdf\Field Books\1992A  BYU EGYPT FIELD BOOK.pdf" />
+    <None Include="wwwroot\pdf\Field Books\1997  BYU EGYPT FIELD BOOK.pdf" />
+    <None Include="wwwroot\pdf\Field Books\2004  BYU EGYPT FIELD BOOK.pdf" />
+    <None Include="wwwroot\pdf\Osteology Data\2000 Bone Book.pdf" />
+    <None Include="wwwroot\pdf\Osteology Data\2002 Bone Book.pdf" />
+    <None Include="wwwroot\pdf\Osteology Data\2012 Bone Book.pdf" />
+    <None Include="wwwroot\pdf\Osteology Data\2013 Bone Book.pdf" />
+    <None Include="wwwroot\pdf\Osteology Data\2014 Bone Book.pdf" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="3.1.13" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.1.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.13" />

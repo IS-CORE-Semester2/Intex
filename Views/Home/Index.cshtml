@@ -11,7 +11,6 @@
 
 <br />
 
-
 @*Project Information in Card*@
 <div class="card">
     <div class="card-header">
@@ -111,17 +110,3 @@
         </div>
     </div>
 </div>
-
-<br />
-
-
-<br />
-
-
-@*Example of how to show something on a page ONLY to an authenticated user*@
-@if (signInManager.IsSignedIn(User))
-{
-    <p>you will only see this if you are signed in</p>
-    @*Don't forget this statement at the top to make this work*@
-    @*    @inject SignInManager<IdentityUser> signInManager;    *@
-}
