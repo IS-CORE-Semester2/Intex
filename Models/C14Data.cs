@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -9,6 +10,7 @@ namespace Intex
 {
     public partial class C14Data
     {
+        [Key]
         public int BurialNumber { get; set; }
         public int? Rack { get; set; }
         public int? NorthSouthNumber { get; set; }

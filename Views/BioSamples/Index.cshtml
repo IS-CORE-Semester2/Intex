@@ -29,9 +29,6 @@
             <th>
                 Date
             </th>
-            <th>
-                Burial
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -50,9 +47,6 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Burial.BurialId)
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.BurialId" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
