@@ -595,3 +595,13 @@
     }
     <a asp-action="Index" class="btn btn-secondary m-1">Back to List</a>
 </div>
+
+@if ((Model.GeFunctionTotal) != 0 && (Model.GeFunctionTotal) != null)
+{
+<dt class="col-sm-2">
+    @Html.DisplayNameFor(model => model.GeFunctionTotal)
+</dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.GeFunctionTotal)
+                </dd>}
+

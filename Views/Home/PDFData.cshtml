@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "PDFs";
+    @inject SignInManager<IdentityUser> signInManager;
+}
+
+<div id="accordion">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn collapsed" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    Osteology Data
+                </button>
+            </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+                <a href="~/pdf/Osteology Data/2000 Bone Book.pdf" class="btn btn-outline-dark" target="_blank">Download 2000 Bone Book</a>
+                <br />
+                <a href="~/pdf/Osteology Data/2002 Bone Book.pdf" class="btn btn-outline-dark" target="_blank">Download 2002 Bone Book</a>
+                <br />
+                <a href="~/pdf/Osteology Data/2012 Bone Book.pdf" class="btn btn-outline-dark" target="_blank">Download 2012 Bone Book</a>
+                <br />
+                <a href="~/pdf/Osteology Data/2013 Bone Book.pdf" class="btn btn-outline-dark" target="_blank">Download 2013 Bone Book</a>
+                <br />
+                <a href="~/pdf/Osteology Data/2014 Bone Book.pdf" class="btn btn-outline-dark" target="_blank">Download 2014 Bone Book</a>
+                <br />
+
+                @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                {
+                    <a class="btn btn-success m-1" href="#">Add New Bone Book</a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingTwo">
+            <h5 class="mb-0">
+                <button class="btn collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    Field Books
+                </button>
+            </h5>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+            <div class="card-body">
+                <a href="~/pdf/Field Books/1992A  BYU EGYPT FIELD BOOK.pdf" class="btn btn-outline-dark" target="_blank">Download 1992A BYU Egypt Field Book</a>
+                <br />
+                <a href="~/pdf/Field Books/1997  BYU EGYPT FIELD BOOK.pdf" class="btn btn-outline-dark" target="_blank">Download 1997 BYU Egypt Field Book</a>
+                <br />
+                <a href="~/pdf/Field Books/2004  BYU EGYPT FIELD BOOK.pdf" class="btn btn-outline-dark" target="_blank">Download 2004 BYU Egypt Field Book</a>
+                <br />
+
+                @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                {
+                    <a class="btn btn-success m-1" href="#">Add New Field Book</a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingThree">
+            <h5 class="mb-0">
+                <button class="btn collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    Archaeological Database Articles
+                </button>
+            </h5>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+                <a href="~/pdf/Archaeological Database Articles/Canmore Scottish Heritage database.pdf" class="btn btn-outline-dark" target="_blank">Download 1992A BYU Egypt Field Book</a>
+                <br />
+                <a href="~/pdf/Archaeological Database Articles/CSA Newsletter, Spring, 2007_ The Arachne Object-database.pdf" class="btn btn-outline-dark" target="_blank">Download 1997 BYU Egypt Field Book</a>
+                <br />
+                <a href="~/pdf/Archaeological Database Articles/neareastarch.77.3.0198.pdf" class="btn btn-outline-dark" target="_blank">Download 2004 BYU Egypt Field Book</a>
+                <br />
+                <a href="~/pdf/Archaeological Database Articles/neareastarch.77.3.0204.pdf" class="btn btn-outline-dark" target="_blank">Download 1997 BYU Egypt Field Book</a>
+                <br />
+                <a href="~/pdf/Archaeological Database Articles/Schloen -- OCHRE - An Online Cultural and Historical Research Environment.pdf" class="btn btn-outline-dark" target="_blank">Download 1997 BYU Egypt Field Book</a>
+                <br />
+
+                @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                {
+                    <a class="btn btn-success m-1" href="#">Add New Database Article</a>
+                }
+            </div>
+        </div>
+    </div>
+</div>
