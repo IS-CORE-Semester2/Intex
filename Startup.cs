@@ -36,6 +36,7 @@ namespace Intex
             services.AddDbContext<BioSamplesDbContext>();
             services.AddDbContext<Cranial2002DbContext>();
             services.AddDbContext<OracleSpreadDbContext>();
+            services.AddDbContext<C14DataDbContext>();
 
             //connection string for Authentication/Identity
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Helpers.GetRDSConnectionString()));
