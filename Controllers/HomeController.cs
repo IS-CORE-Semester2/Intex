@@ -29,8 +29,8 @@ namespace Intex.Controllers
             return View();
         }
 
-        //get request for Burial Summary page
-        public IActionResult BurialSummary()
+        //get request for bone books
+        public IActionResult BoneBooks()
         {
             return View();
         }
