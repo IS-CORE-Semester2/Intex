@@ -14,6 +14,14 @@ namespace Intex.Data
             : base(options)
         { }
 
+        public ApplicationDbContext()
+        { }
+
+        public static ApplicationDbContext Create() //Add this change
+        {
+            return new ApplicationDbContext();
+        }
+
         //Bring in sets of Burials and BioSamples
         public DbSet<Burials> Burials { get; set; }
         public DbSet<BioSamples> BioSamples { get; set; }

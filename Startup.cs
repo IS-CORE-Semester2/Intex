@@ -38,7 +38,7 @@ namespace Intex
             services.AddDbContext<OracleSpreadDbContext>();
 
             //connection string for Authentication/Identity
-            services.AddDbContextPool<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Helpers.GetRDSConnectionString()));
 
             ////Role Based Identification
             services.AddIdentity<IdentityUser, IdentityRole>(options =>
@@ -64,12 +64,13 @@ namespace Intex
             //});
 
             //##################################################################################################################
-            
-            
+
             //EMAIL SENDER DOES NOT CURRENTLY WORK BUT CAN BE CONFIGURED TO WORK IN THE FUTURE
             ////set up email verification sender
             //services.AddTransient<IEmailSender, EmailSender>();
             //services.Configure<AuthMessageSenderOptions>(Configuration);
+
+            //##################################################################################################################
 
             services.AddRazorPages();
         }
