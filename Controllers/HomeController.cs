@@ -29,8 +29,8 @@ namespace Intex.Controllers
             return View();
         }
 
-        //get request for bone books
-        public IActionResult BoneBooks()
+        //get request for PDFData
+        public IActionResult PDFData()
         {
             return View();
         }
