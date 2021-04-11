@@ -32,9 +32,6 @@
             <th>
                 Date Found
             </th>
-            <th>
-                Head Direction
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -55,21 +52,18 @@
                     @Html.DisplayFor(modelItem => item.BurialSituation)
                 </td>
                 <td>
-                    @if (Html.DisplayFor(modelItem => item.DayFound) == null && Html.DisplayFor(modelItem => item.MonthFound) == null)
+                    @if (item.DayFound == null && item.MonthFound == null)
                     {
                         @Html.DisplayFor(modelItem => item.YearFound)
                     }
-                    @if (Html.DisplayFor(modelItem => item.DayFound) == null && Html.DisplayFor(modelItem => item.MonthFound) != null)
+                    @if (item.DayFound == null && item.MonthFound != null)
                     {
-                        @Html.DisplayFor(modelItem => item.MonthFound) @Html.DisplayFor(modelItem => item.YearFound)
+                        @String.Concat(item.MonthFound, " ", item.YearFound)
                     }
-                    @if (Html.DisplayFor(modelItem => item.DayFound) != null)
+                    @if (item.DayFound != null)
                     {
-                        @Html.DisplayFor(modelItem => item.MonthFound); @Html.DisplayFor(modelItem => item.DayFound); @Html.DisplayFor(modelItem => item.YearFound)
+                        @String.Concat(item.MonthFound, " ", item.DayFound, ", ", item.YearFound)
                     }
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HeadDirection)
                 </td>
                 <td>
                     @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
