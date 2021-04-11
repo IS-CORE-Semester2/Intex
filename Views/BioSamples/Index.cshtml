@@ -2,11 +2,11 @@
 @inject SignInManager<IdentityUser> signInManager;
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Bio Samples";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Bio Samples</h1>
 
 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
 {
