@@ -52,6 +52,11 @@ namespace Intex.Controllers
         [HttpPost]
         public IActionResult PDFDataUpload(PDFUploadViewModel model, int fileId)
         {
+            if(model.PDFFiles == null)
+            {
+                return View();
+            }
+
             if (ModelState.IsValid)
             {
                 string uniqueFileName = null;

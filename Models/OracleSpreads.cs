@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Intex
 {
-    public partial class OracleSpread
+    public partial class OracleSpreads
     {
         [Key]
         public int? Gamous { get; set; }

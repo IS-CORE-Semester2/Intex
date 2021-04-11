@@ -14,10 +14,9 @@ namespace Intex.ViewModels
         public List<Burials> Burials { get; set; }
         public List<BioSamples> BioSamples { get; set; }
         public List<Cranial2002> Cranial2002s { get; set; }
-        public List<OracleSpread> OracleSpreads { get; set; }
+        public List<OracleSpreads> OracleSpreads { get; set; }
 
         //this one is used to set how many pages there are
         public PagingInfo PagingInfo { get; set; }
-        //public string Type { get; set; }
     }
 }

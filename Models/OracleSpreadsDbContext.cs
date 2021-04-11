@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Intex.Models
 {
-    public class OracleSpreadDbContext : DbContext
+    public class OracleSpreadsDbContext : DbContext
 	{
-		public OracleSpreadDbContext(DbContextOptions<OracleSpreadDbContext> options) : base(options)
+		public OracleSpreadsDbContext(DbContextOptions<OracleSpreadsDbContext> options) : base(options)
 		{ }
 
 		protected override void OnConfiguring(DbContextOptionsBuilder options)
 			=> options.UseSqlServer(Helpers.GetRDSConnectionString());
-		public DbSet<OracleSpread> OracleSpread { get; set; }
+		public DbSet<OracleSpreads> OracleSpread { get; set; }
 	}
 }

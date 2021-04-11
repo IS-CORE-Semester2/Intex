@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex;
 using Intex.Models;
+using Intex.ViewModels;
 
 namespace Intex.Controllers
 {
@@ -20,11 +21,33 @@ namespace Intex.Controllers
         }
 
         // GET: BioSamples
-        public async Task<IActionResult> Index()
+        //public async Task<IActionResult> Index()
+        //{
+        //    var bioSamplesDbContext = _context.BioSamples.Include(b => b.Burial);
+        //    return View(await bioSamplesDbContext.ToListAsync());
+        //}
+
+
+        public IActionResult Index(int pageNum = 1)
         {
-            var bioSamplesDbContext = _context.BioSamples.Include(b => b.Burial);
-            return View(await bioSamplesDbContext.ToListAsync());
+            int pageSize = 10;
+
+            return View(new IndexViewModel
+            {
+                BioSamples = _context.BioSamples
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList(),
+
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = pageNum,
+                    ItemsPerPage = pageSize,
+                    TotalNumItems = (_context.BioSamples.Count())
+                },
+            });
         }
+
 
         // GET: BioSamples/Details/5
         public async Task<IActionResult> Details(int? id)

@@ -28,20 +28,11 @@ namespace Intex.Controllers
 
 
         public IActionResult Index(int pageNum = 1)
-         //public IActionResult Index(long? mealtypeid, string mealtype, int pageNum = 0) //used for filtering I think
         {
             int pageSize = 10;
 
             return View(new IndexViewModel
             {
-                //used for filtering
-                //Recipes = context.Recipes
-                //    .Where(m => m.RecipeClassId == mealtypeid || mealtypeid == null)
-                //    .OrderBy(m => m.RecipeTitle)
-                //    .Skip((pageNum - 1) * pageSize)
-                //    .Take(pageSize)
-                //    .ToList(),
-
                 Burials = _context.Burials
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize)
@@ -51,14 +42,8 @@ namespace Intex.Controllers
                 {
                     CurrentPage = pageNum,
                     ItemsPerPage = pageSize,
-                    //if no meal has been selected, get the full count.
-                    //else, if a meal has been selected, get the count for the selected meal type
-                    //TotalNumItems = (mealtypeid == null ? context.Recipes.Count() : context.Recipes.Where(x => x.RecipeClassId == mealtypeid).Count())
                     TotalNumItems = (_context.Burials.Count())
                 },
-
-                //filtering I think
-                //Type = mealtype
             });
         }
 

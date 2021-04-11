@@ -35,7 +35,7 @@ namespace Intex
             services.AddDbContext<BurialsDbContext>();
             services.AddDbContext<BioSamplesDbContext>();
             services.AddDbContext<Cranial2002DbContext>();
-            services.AddDbContext<OracleSpreadDbContext>();
+            services.AddDbContext<OracleSpreadsDbContext>();
             services.AddDbContext<C14DataDbContext>();
 
             //connection string for Authentication/Identity

@@ -410,7 +410,7 @@ namespace Intex.Data.Migrations
                     b.ToTable("PDFFiles");
                 });
 
-            modelBuilder.Entity("Intex.OracleSpread", b =>
+            modelBuilder.Entity("Intex.OracleSpreads", b =>
                 {
                     b.Property<int?>("Gamous")
                         .ValueGeneratedOnAdd()
@@ -696,7 +696,7 @@ namespace Intex.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("Intex.OracleSpread", b =>
+            modelBuilder.Entity("Intex.OracleSpreads", b =>
                 {
                     b.HasOne("Intex.Burials", "Burial")
                         .WithMany()

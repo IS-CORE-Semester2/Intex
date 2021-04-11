@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex;
 using Intex.Models;
+using Intex.ViewModels;
 
 namespace Intex.Controllers
 {
@@ -19,10 +20,30 @@ namespace Intex.Controllers
             _context = context;
         }
 
-        // GET: Cranial2002
-        public async Task<IActionResult> Index()
+        //// GET: Cranial2002
+        //public async Task<IActionResult> Index()
+        //{
+        //    return View(await _context.Cranial2002.ToListAsync());
+        //}
+
+        public IActionResult Index(int pageNum = 1)
         {
-            return View(await _context.Cranial2002.ToListAsync());
+            int pageSize = 10;
+
+            return View(new IndexViewModel
+            {
+                Cranial2002s = _context.Cranial2002
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList(),
+
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = pageNum,
+                    ItemsPerPage = pageSize,
+                    TotalNumItems = (_context.Cranial2002.Count())
+                },
+            });
         }
 
         // GET: Cranial2002/Details/5
