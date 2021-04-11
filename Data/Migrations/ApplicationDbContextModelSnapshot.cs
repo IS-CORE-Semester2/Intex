@@ -389,6 +389,27 @@ namespace Intex.Data.Migrations
                     b.ToTable("Cranial2002s");
                 });
 
+            modelBuilder.Entity("Intex.Models.PDFFile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FileId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PDFFiles");
+                });
+
             modelBuilder.Entity("Intex.OracleSpread", b =>
                 {
                     b.Property<int?>("Gamous")

@@ -27,6 +27,7 @@ namespace Intex.Data
         public DbSet<BioSamples> BioSamples { get; set; }
         public DbSet<OracleSpread> OracleSpreads { get; set; }
         public DbSet<Cranial2002> Cranial2002s { get; set; }
+        public DbSet<PDFFile> PDFFiles { get; set; }
 
 
         //Change default SQL behavior from cascading deletion to "no action"

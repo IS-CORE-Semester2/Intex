@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "PDFs";
     @inject SignInManager<IdentityUser> signInManager;
+    @model IEnumerable<PDFFile>
 }
 
 <h1>Downloadable PDF Versions of Our Data</h1>
@@ -18,20 +19,40 @@
 
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
-                <a href="~/pdf/Osteology Data/2000 Bone Book.pdf" class="btn btn-outline-dark" target="_blank">Download 2000 Bone Book</a>
-                <br />
-                <a href="~/pdf/Osteology Data/2002 Bone Book.pdf" class="btn btn-outline-dark" target="_blank">Download 2002 Bone Book</a>
-                <br />
-                <a href="~/pdf/Osteology Data/2012 Bone Book.pdf" class="btn btn-outline-dark" target="_blank">Download 2012 Bone Book</a>
-                <br />
-                <a href="~/pdf/Osteology Data/2013 Bone Book.pdf" class="btn btn-outline-dark" target="_blank">Download 2013 Bone Book</a>
-                <br />
-                <a href="~/pdf/Osteology Data/2014 Bone Book.pdf" class="btn btn-outline-dark" target="_blank">Download 2014 Bone Book</a>
-                <br />
+                @foreach (var p in Model)
+                {
+                    @if (p.FileId == 1)
+                    {
+                        <div class="input-group">
+
+                            <a href="~/pdf/Osteology Data/@p.Path" class="btn btn-outline-dark form-control" target="_blank">@p.Name</a>
+
+                            @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                            {
+                                <form asp-action="DeleteFile" method="post">
+                                    <input type="hidden" name="Id" value="@p.Id" />
+                                    <span id="confirmDeleteSpan_@p.Id" style="display:none">
+                                        <span>Are you sure you want to delete?</span>
+                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                        <a href="#" class="btn btn-secondary"
+                                           onclick="confirmDelete('@p.Id', false)">No</a>
+                                    </span>
+                                    <span id="deleteSpan_@p.Id">
+                                        <a href="#" class="btn btn-danger form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
+                                    </span>
+                                </form>
+                            }
+                        </div>
+                    }
+                }
 
                 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                 {
-                    <a class="btn btn-success m-1" href="#">Add New Bone Book</a>
+                    <a class="btn btn-success m-1"
+                       asp-controller="Home"
+                       asp-action="PDFDataUpload"
+                       asp-route-category="Osteology Data"
+                       asp-route-fileId="1">Add a New Entry</a>
                 }
             </div>
         </div>
@@ -46,16 +67,40 @@
         </div>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
             <div class="card-body">
-                <a href="~/pdf/Field Books/1992A  BYU EGYPT FIELD BOOK.pdf" class="btn btn-outline-dark" target="_blank">Download 1992A BYU Egypt Field Book</a>
-                <br />
-                <a href="~/pdf/Field Books/1997  BYU EGYPT FIELD BOOK.pdf" class="btn btn-outline-dark" target="_blank">Download 1997 BYU Egypt Field Book</a>
-                <br />
-                <a href="~/pdf/Field Books/2004  BYU EGYPT FIELD BOOK.pdf" class="btn btn-outline-dark" target="_blank">Download 2004 BYU Egypt Field Book</a>
-                <br />
+                @foreach (var p in Model)
+                {
+                    @if (p.FileId == 2)
+                    {
+                        <div class="input-group">
+
+                            <a href="~/pdf/Field Books/@p.Path" class="btn btn-outline-dark form-control" target="_blank">@p.Name</a>
+
+                            @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                            {
+                                <form asp-action="DeleteFile" method="post">
+                                    <input type="hidden" name="Id" value="@p.Id" />
+                                    <span id="confirmDeleteSpan_@p.Id" style="display:none">
+                                        <span>Are you sure you want to delete?</span>
+                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                        <a href="#" class="btn btn-secondary"
+                                           onclick="confirmDelete('@p.Id', false)">No</a>
+                                    </span>
+                                    <span id="deleteSpan_@p.Id">
+                                        <a href="#" class="btn btn-danger form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
+                                    </span>
+                                </form>
+                            }
+                        </div>
+                    }
+                }
 
                 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                 {
-                    <a class="btn btn-success m-1" href="#">Add New Field Book</a>
+                    <a class="btn btn-success m-1"
+                       asp-controller="Home"
+                       asp-action="PDFDataUpload"
+                       asp-route-category="Field Book"
+                       asp-route-fileId="2">Add a New Entry</a>
                 }
             </div>
         </div>
@@ -70,22 +115,96 @@
         </div>
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
             <div class="card-body">
-                <a href="~/pdf/Archaeological Database Articles/Canmore Scottish Heritage database.pdf" class="btn btn-outline-dark" target="_blank">Download 1992A BYU Egypt Field Book</a>
-                <br />
-                <a href="~/pdf/Archaeological Database Articles/CSA Newsletter, Spring, 2007_ The Arachne Object-database.pdf" class="btn btn-outline-dark" target="_blank">Download 1997 BYU Egypt Field Book</a>
-                <br />
-                <a href="~/pdf/Archaeological Database Articles/neareastarch.77.3.0198.pdf" class="btn btn-outline-dark" target="_blank">Download 2004 BYU Egypt Field Book</a>
-                <br />
-                <a href="~/pdf/Archaeological Database Articles/neareastarch.77.3.0204.pdf" class="btn btn-outline-dark" target="_blank">Download 1997 BYU Egypt Field Book</a>
-                <br />
-                <a href="~/pdf/Archaeological Database Articles/Schloen -- OCHRE - An Online Cultural and Historical Research Environment.pdf" class="btn btn-outline-dark" target="_blank">Download 1997 BYU Egypt Field Book</a>
-                <br />
+                @foreach (var p in Model)
+                {
+                    @if (p.FileId == 3)
+                    {
+                        <div class="input-group">
+
+                            <a href="~/pdf/Archaeological Database Articles/@p.Path" class="btn btn-outline-dark form-control" target="_blank">@p.Name</a>
+
+                            @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                            {
+                                <form asp-action="DeleteFile" method="post">
+                                    <input type="hidden" name="Id" value="@p.Id" />
+                                    <span id="confirmDeleteSpan_@p.Id" style="display:none">
+                                        <span>Are you sure you want to delete?</span>
+                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                        <a href="#" class="btn btn-secondary"
+                                           onclick="confirmDelete('@p.Id', false)">No</a>
+                                    </span>
+                                    <span id="deleteSpan_@p.Id">
+                                        <a href="#" class="btn btn-danger form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
+                                    </span>
+                                </form>
+                            }
+                        </div>
+                    }
+                }
 
                 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                 {
-                    <a class="btn btn-success m-1" href="#">Add New Database Article</a>
+                    <a class="btn btn-success m-1"
+                       asp-controller="Home"
+                       asp-action="PDFDataUpload"
+                       asp-route-category="Archaeological Database Article"
+                       asp-route-fileId="3">Add a New Entry</a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" id="headingFour">
+            <h5 class="mb-0">
+                <button class="btn collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    Other Files
+                </button>
+            </h5>
+        </div>
+        <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
+            <div class="card-body">
+                @foreach (var p in Model)
+                {
+                    @if (p.FileId == 4)
+                    {
+                        <div class="input-group">
+
+                            <a href="~/pdf/Misc Data/@p.Path" class="btn btn-outline-dark form-control" target="_blank">@p.Name</a>
+
+                            @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                            {
+                                <form asp-action="DeleteFile" method="post">
+                                    <input type="hidden" name="Id" value="@p.Id" />
+                                    <span id="confirmDeleteSpan_@p.Id" style="display:none">
+                                        <span>Are you sure you want to delete?</span>
+                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                        <a href="#" class="btn btn-secondary"
+                                           onclick="confirmDelete('@p.Id', false)">No</a>
+                                    </span>
+                                    <span id="deleteSpan_@p.Id">
+                                        <a href="#" class="btn btn-danger form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
+                                    </span>
+                                </form>
+                            }
+                        </div>
+                    }
+                }
+
+                @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                {
+                    <a class="btn btn-success m-1"
+                       asp-controller="Home"
+                       asp-action="PDFDataUpload"
+                       asp-route-category="Other"
+                       asp-route-fileId="4">Add a New Entry</a>
                 }
             </div>
         </div>
     </div>
 </div>
+
+
+@*Pull in JS for confirm delete*@
+@section Scripts {
+    <script src="~/js/CustomScript.js"></script>
+}
