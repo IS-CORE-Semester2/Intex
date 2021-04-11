@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex;
 using Intex.Models;
+using Intex.ViewModels;
 
 namespace Intex.Controllers
 {
@@ -19,10 +20,30 @@ namespace Intex.Controllers
             _context = context;
         }
 
-        // GET: C14Data
-        public async Task<IActionResult> Index()
+        //// GET: C14Data
+        //public async Task<IActionResult> Index()
+        //{
+        //    return View(await _context.C14Data.ToListAsync());
+        //}
+
+        public IActionResult Index(int pageNum = 1)
         {
-            return View(await _context.C14Data.ToListAsync());
+            int pageSize = 10;
+
+            return View(new IndexViewModel
+            {
+                C14Datas = _context.C14Data
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList(),
+
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = pageNum,
+                    ItemsPerPage = pageSize,
+                    TotalNumItems = (_context.C14Data.Count())
+                },
+            });
         }
 
         // GET: C14Data/Details/5

@@ -236,7 +236,7 @@ namespace Intex.Data.Migrations
                     Calibrated95CalendarDateMAX = table.Column<int>(name: "Calibrated 95% Calendar Date MAX", nullable: true),
                     Calibrated95CalendarDateMIN = table.Column<int>(name: "Calibrated 95% Calendar Date MIN", nullable: true),
                     Calibrated95CalendarDateSPAN = table.Column<int>(name: "Calibrated 95% Calendar Date SPAN", nullable: true),
-                    Calibrated95CalendarDateAVG = table.Column<string>(name: "Calibrated 95% Calendar Date AVG", fixedLength: true, maxLength: 100, nullable: true),
+                    Calibrated95CalendarDateAVG = table.Column<int>(name: "Calibrated 95% Calendar Date AVG", fixedLength: true, maxLength: 100, nullable: true),
                     Category = table.Column<string>(fixedLength: true, maxLength: 100, nullable: true),
                     Notes = table.Column<string>(fixedLength: true, maxLength: 100, nullable: true)
                 },

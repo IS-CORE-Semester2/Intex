@@ -32,7 +32,7 @@ namespace Intex
         public int? Calibrated95CalendarDateMax { get; set; }
         public int? Calibrated95CalendarDateMin { get; set; }
         public int? Calibrated95CalendarDateSpan { get; set; }
-        public string Calibrated95CalendarDateAvg { get; set; }
+        public int? Calibrated95CalendarDateAvg { get; set; }
         public string Category { get; set; }
         public string Notes { get; set; }
     }
