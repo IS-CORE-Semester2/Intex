@@ -30,6 +30,8 @@ namespace Intex.Controllers
         public IActionResult Index(int pageNum = 1)
         {
             int pageSize = 10;
+            //rachel's filtering attempt
+
 
             return View(new IndexViewModel
             {

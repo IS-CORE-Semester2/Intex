@@ -71,23 +71,23 @@
                         <a asp-action="Edit" asp-route-id="@item.BurialId" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
                     }
 
-                    <a asp-action="Details" asp-route-id="@item.BurialId" class="btn btn-info m-1" style="width: 80px">Details</a>
-                    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                    {
-                        <a asp-action="Delete" asp-route-id="@item.BurialId" class="btn btn-danger m-1" style="width: 80px">Delete</a>
-                    }
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+                        <a asp-action="Details" asp-route-id="@item.BurialId" class="btn btn-info m-1" style="width: 80px">Details</a>
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.BurialId" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
-<div class="text-center">
-    <div page-model="@Model.PagingInfo"
-         page-classes-enabled="true"
-         page-class="btn"
-         page-class-normal="btn-outline-dark"
-         page-class-selected="btn-primary"
-         class="btn-group pull-right m-1"></div>
-</div>
+    <div class="text-center">
+        <div page-model="@Model.PagingInfo"
+             page-classes-enabled="true"
+             page-class="btn"
+             page-class-normal="btn-outline-dark"
+             page-class-selected="btn-primary"
+             class="btn-group pull-right m-1"></div>
+    </div>
 
