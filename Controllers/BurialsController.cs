@@ -31,6 +31,8 @@ namespace Intex.Controllers
          //public IActionResult Index(long? mealtypeid, string mealtype, int pageNum = 0) //used for filtering I think
         {
             int pageSize = 10;
+            //rachel's filtering attempt
+
 
             return View(new IndexViewModel
             {
