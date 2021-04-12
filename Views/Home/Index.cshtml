@@ -3,14 +3,26 @@
     @inject SignInManager<IdentityUser> signInManager;
 }
 
-@*Generic welcome*@
-<div class="text-center">
-    <h1 class="display-3">BYU Egypt Excavation Project</h1>
-    <h3 class="display-4">Fag el-Gamous Cemetery</h3>
+@*Full Page Image Header with Vertically Centered Content*@
+<header class="masthead">
+    <div class="container h-100">
+        <div class="row h-100 align-items-center">
+            <div class="col-12 text-center">
+                <h1 class="display-3 text-white">BYU Egypt Excavation Project</h1>
+                <p class="lead display-4 text-white">Fag el-Gamous Cemetery</p>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="btn-group special" role="group" aria-label="...">
+    <button type="button" class="btn btn-egyptianblue">About Us</button>
+    <button type="button" class="btn btn-uclagold">Middle</button>
+    <button type="button" class="btn btn-cedarchest">Right</button>
+    <button type="button" class="btn btn-brownsugar">Right</button>
 </div>
 
 <br />
-
 
 @*Project Information in Card*@
 <div class="card">
@@ -22,7 +34,6 @@
         <p>During multiple years of study, researchers have excavated more than 1,000 mummies and collected data in field notes, spreadsheets, and simple databases about each mummy’s location, physical orientation in the ground, burial depth, hair color, wrapping (including information about the textiles used), gender, age, bone (including skull and teeth) dimensions, items accompanying the mummy, and more. And, of course, there are many, many photographs. Offsite, researchers have performed a variety of analyses on the items excavated including carbon dating, DNA sequencing, and others.</p>
     </div>
 </div>
-
 <br />
 
 @*Show some pictures of the area from above*@
@@ -111,17 +122,3 @@
         </div>
     </div>
 </div>
-
-<br />
-
-
-<br />
-
-
-@*Example of how to show something on a page ONLY to an authenticated user*@
-@if (signInManager.IsSignedIn(User))
-{
-    <p>you will only see this if you are signed in</p>
-    @*Don't forget this statement at the top to make this work*@
-    @*    @inject SignInManager<IdentityUser> signInManager;    *@
-}

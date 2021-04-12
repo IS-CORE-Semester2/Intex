@@ -312,6 +312,87 @@ namespace Intex.Data.Migrations
                     b.ToTable("Burials");
                 });
 
+            modelBuilder.Entity("Intex.C14Data", b =>
+                {
+                    b.Property<int>("BurialNumber")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("Area")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("C14Sample2017")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Calibrated95CalendarDateAvg")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Calibrated95CalendarDateMax")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Calibrated95CalendarDateMin")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Calibrated95CalendarDateSpan")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Category")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Conventional14cAgeBp")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EastWestLetter")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("EastWestNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Foci")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Location")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NorthSouthLetter")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("NorthSouthNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("OtherNumber")
+                        .HasColumnType("int");
+
+                    b.Property<string>("QuestionS")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Rack")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SizeMl")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Square")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("TubeNumber")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("_14cCalendarDate")
+                        .HasColumnType("int");
+
+                    b.HasKey("BurialNumber");
+
+                    b.ToTable("C14Datas");
+                });
+
             modelBuilder.Entity("Intex.Cranial2002", b =>
                 {
                     b.Property<int?>("SampleNumber")
@@ -389,7 +470,28 @@ namespace Intex.Data.Migrations
                     b.ToTable("Cranial2002s");
                 });
 
-            modelBuilder.Entity("Intex.OracleSpread", b =>
+            modelBuilder.Entity("Intex.Models.PDFFile", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FileId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Path")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PDFFiles");
+                });
+
+            modelBuilder.Entity("Intex.OracleSpreads", b =>
                 {
                     b.Property<int?>("Gamous")
                         .ValueGeneratedOnAdd()
@@ -675,7 +777,7 @@ namespace Intex.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
                 });
 
-            modelBuilder.Entity("Intex.OracleSpread", b =>
+            modelBuilder.Entity("Intex.OracleSpreads", b =>
                 {
                     b.HasOne("Intex.Burials", "Burial")
                         .WithMany()

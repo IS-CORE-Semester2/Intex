@@ -30,7 +30,7 @@
             @*Form used for delete request to guard against "get request" having ability to delete roles*@
         <div class="card-footer">
             <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
-                <a class="btn btn-warning" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit</a>
+                <a class="btn btn-secondary" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit</a>
                 <span id="confirmDeleteSpan_@role.Id" style="display:none">
                     <span>Are you sure you want to delete?</span>
                     <button type="submit" class="btn btn-danger">Yes</button>

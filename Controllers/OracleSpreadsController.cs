@@ -7,22 +7,43 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Intex;
 using Intex.Models;
+using Intex.ViewModels;
 
 namespace Intex.Controllers
 {
     public class OracleSpreadsController : Controller
     {
-        private readonly OracleSpreadDbContext _context;
+        private readonly OracleSpreadsDbContext _context;
 
-        public OracleSpreadsController(OracleSpreadDbContext context)
+        public OracleSpreadsController(OracleSpreadsDbContext context)
         {
             _context = context;
         }
 
-        // GET: OracleSpreads
-        public async Task<IActionResult> Index()
+        //// GET: OracleSpreads
+        //public async Task<IActionResult> Index()
+        //{
+        //    return View(await _context.OracleSpread.ToListAsync());
+        //}
+
+        public IActionResult Index(int pageNum = 1)
         {
-            return View(await _context.OracleSpread.ToListAsync());
+            int pageSize = 10;
+
+            return View(new IndexViewModel
+            {
+                OracleSpreads = _context.OracleSpread
+                    .Skip((pageNum - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList(),
+
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = pageNum,
+                    ItemsPerPage = pageSize,
+                    TotalNumItems = (_context.OracleSpread.Count())
+                },
+            });
         }
 
         // GET: OracleSpreads/Details/5
@@ -54,15 +75,15 @@ namespace Intex.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Gamous,BurialSquare,Nors,Sq2,Eorw,Area,Burialnum,Westtohead,Westtofeet,Southtohead,Southtofeet,Depth,Preservation,Burialicon,Sex,Sexmethod,Ageatdeath,Agemethod,Haircolor,Sample")] OracleSpread oracleSpread)
+        public async Task<IActionResult> Create([Bind("Gamous,BurialSquare,Nors,Sq2,Eorw,Area,Burialnum,Westtohead,Westtofeet,Southtohead,Southtofeet,Depth,Preservation,Burialicon,Sex,Sexmethod,Ageatdeath,Agemethod,Haircolor,Sample")] OracleSpreads oracleSpreads)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(oracleSpread);
+                _context.Add(oracleSpreads);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(oracleSpread);
+            return View(oracleSpreads);
         }
 
         // GET: OracleSpreads/Edit/5
@@ -86,7 +107,7 @@ namespace Intex.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int? id, [Bind("Gamous,BurialSquare,Nors,Sq2,Eorw,Area,Burialnum,Westtohead,Westtofeet,Southtohead,Southtofeet,Depth,Preservation,Burialicon,Sex,Sexmethod,Ageatdeath,Agemethod,Haircolor,Sample")] OracleSpread oracleSpread)
+        public async Task<IActionResult> Edit(int? id, [Bind("Gamous,BurialSquare,Nors,Sq2,Eorw,Area,Burialnum,Westtohead,Westtofeet,Southtohead,Southtofeet,Depth,Preservation,Burialicon,Sex,Sexmethod,Ageatdeath,Agemethod,Haircolor,Sample")] OracleSpreads oracleSpread)
         {
             if (id != oracleSpread.Gamous)
             {

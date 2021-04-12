@@ -1,0 +1,72 @@
+﻿@model IndexViewModel
+@inject SignInManager<IdentityUser> signInManager;
+
+@{
+    ViewData["Title"] = "Carbon Dating";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Carbon Dating</h1>
+
+@if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+{
+    <a class="btn btn-success m-1" asp-action="Create">Add New Entry</a>
+    <br />
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Rack</th>
+            <th>Square</th>
+            <th>Description</th>
+            <th>Location</th>
+            <th>Calibrated 95 Calendar Date Avg</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.C14Datas)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rack)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Square)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Location)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateAvg)
+            </td>
+            <td>
+                @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                {
+                    <a asp-action="Edit" asp-route-id="@item.BurialNumber" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
+                }
+
+                <a asp-action="Details" asp-route-id="@item.BurialNumber" class="btn btn-info m-1" style="width: 80px">Details</a>
+
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+                    <a asp-action="Delete" asp-route-id="@item.BurialNumber" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                }
+            </td>
+
+        </tr>
+        }
+    </tbody>
+</table>
+
+<div class="text-center">
+    <div page-model="@Model.PagingInfo"
+         page-classes-enabled="true"
+         page-class="btn"
+         page-class-normal="btn-outline-dark"
+         page-class-selected="btn-primary"
+         class="btn-group pull-right m-1"></div>
+</div>

@@ -1,12 +1,12 @@
-﻿@model IEnumerable<Intex.BioSamples>
+﻿@model IndexViewModel
 @inject SignInManager<IdentityUser> signInManager;
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Bio Samples";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Bio Samples</h1>
 
 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
 {
@@ -29,14 +29,11 @@
             <th>
                 Date
             </th>
-            <th>
-                Burial
-            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.BioSamples)
         {
             <tr>
                 <td>
@@ -52,9 +49,6 @@
                     @Html.DisplayFor(modelItem => item.Date)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Burial.BurialId)
-                </td>
-                <td>
                     <a asp-action="Edit" asp-route-id="@item.BurialId" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
                     <a asp-action="Details" asp-route-id="@item.BurialId" class="btn btn-info m-1" style="width: 80px">Details</a>
                     <a asp-action="Delete" asp-route-id="@item.BurialId" class="btn btn-danger m-1" style="width: 80px">Delete</a>
@@ -63,3 +57,12 @@
         }
     </tbody>
 </table>
+
+<div class="text-center">
+    <div page-model="@Model.PagingInfo"
+         page-classes-enabled="true"
+         page-class="btn"
+         page-class-normal="btn-outline-dark"
+         page-class-selected="btn-primary"
+         class="btn-group pull-right m-1"></div>
+</div>

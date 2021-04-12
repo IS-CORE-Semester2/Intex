@@ -260,6 +260,30 @@ namespace Intex.Controllers
             return View(roles);
         }
 
+        //Below is basically the same as above but with pagination if I can figure that out
+        ////Get request to list all created roles
+        //[HttpGet]
+        //public IActionResult ListRoles(int pageNum = 1)
+        //{
+        //    int pageSize = 10;
+        //    var roles = roleManager.Roles;
+
+        //    return View(new IndexViewModel
+        //    {
+        //        Roles = roleManager.Roles
+        //            .Skip((pageNum - 1) * pageSize)
+        //            .Take(pageSize)
+        //            .ToList(),
+
+        //        PagingInfo = new PagingInfo
+        //        {
+        //            CurrentPage = pageNum,
+        //            ItemsPerPage = pageSize,
+        //            TotalNumItems = (roleManager.Roles.Count())
+        //        },
+        //    });
+        //}
+
         //get request to edit a single role that has already been created
         //also provide early framework to add/remove users from that single role
         [HttpGet]

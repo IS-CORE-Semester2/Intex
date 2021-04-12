@@ -3,6 +3,7 @@ using Intex.Models;
 using Intex.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -35,7 +36,8 @@ namespace Intex
             services.AddDbContext<BurialsDbContext>();
             services.AddDbContext<BioSamplesDbContext>();
             services.AddDbContext<Cranial2002DbContext>();
-            services.AddDbContext<OracleSpreadDbContext>();
+            services.AddDbContext<OracleSpreadsDbContext>();
+            services.AddDbContext<C14DataDbContext>();
 
             //connection string for Authentication/Identity
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Helpers.GetRDSConnectionString()));

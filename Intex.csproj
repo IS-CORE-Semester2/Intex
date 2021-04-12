@@ -22,4 +22,11 @@
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="5.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\pdf\Archaeological Database Articles\" />
+    <Folder Include="wwwroot\pdf\Field Books\" />
+    <Folder Include="wwwroot\pdf\Misc Data\" />
+    <Folder Include="wwwroot\pdf\Osteology Data\" />
+  </ItemGroup>
+
 </Project>

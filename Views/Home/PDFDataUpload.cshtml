@@ -1,0 +1,37 @@
+﻿@{
+    ViewData["Title"] = "PDFs";
+    @inject SignInManager<IdentityUser> signInManager;
+    @model PDFUploadViewModel
+}
+
+<h1>Add New @ViewBag.category</h1>
+<br />
+
+<div class="card">
+    <div class="card-header">
+        <h3>Upload a new file</h3>
+    </div>
+    <div class="card-body">
+        <form enctype="multipart/form-data" asp-controller="Home" asp-action="PDFDataUpload" asp-route-FileID="@ViewBag.fileId" asp-route-category="@ViewBag.category">
+            <div class="custom-file">
+                <input asp-for="PDFFiles" class="form-control custom-file-input" />
+                <label class="custom-file-label">Choose File...</label>
+            </div>
+            <br />
+            <br />
+
+            <button type="submit" class="btn btn-success">Upload</button>
+
+            @section Scripts {
+                <script>
+                    $(document).ready(function () {
+                        $('.custom-file-input').on("change", function () {
+                            var fileName = $(this).val().split("\\").pop();
+                            $(this).next('.custom-file-label').html(fileName);
+                        });
+                    });
+                </script>
+            }
+        </form>
+    </div>
+</div>
