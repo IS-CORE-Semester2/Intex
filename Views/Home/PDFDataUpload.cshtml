@@ -9,10 +9,10 @@
 
 <div class="card">
     <div class="card-header">
-        <h3>The Project</h3>
+        <h3>Upload a new file</h3>
     </div>
     <div class="card-body">
-        <form enctype="multipart/form-data" asp-controller="Home" asp-action="PDFDataUpload" asp-route-FileID="@ViewBag.fileId">
+        <form enctype="multipart/form-data" asp-controller="Home" asp-action="PDFDataUpload" asp-route-FileID="@ViewBag.fileId" asp-route-category="@ViewBag.category">
             <div class="custom-file">
                 <input asp-for="PDFFiles" class="form-control custom-file-input" />
                 <label class="custom-file-label">Choose File...</label>

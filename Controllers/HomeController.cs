@@ -45,15 +45,19 @@ namespace Intex.Controllers
         {
             ViewBag.fileId = fileId;
             ViewBag.category = category;
+
             return View();
         }
 
-        //create action for adding Bone Book Files
+        //Post request for adding PDF Files
         [HttpPost]
-        public IActionResult PDFDataUpload(PDFUploadViewModel model, int fileId)
+        public IActionResult PDFDataUpload(PDFUploadViewModel model, int fileId, string category)
         {
             if(model.PDFFiles == null)
             {
+                ViewBag.fileId = fileId;
+                ViewBag.category = category;
+
                 return View();
             }
 
