@@ -48,6 +48,12 @@ namespace Intex.Controllers
             });
         }
 
+        //Page to filter by ALL data in a database
+        public IActionResult AllData()
+        {
+            return View(_context.BioSamples);
+        }
+
 
         // GET: BioSamples/Details/5
         public async Task<IActionResult> Details(int? id)

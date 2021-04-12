@@ -1,4 +1,4 @@
-﻿@model IndexViewModel
+﻿@model IEnumerable<BioSamples>
 @inject SignInManager<IdentityUser> signInManager;
 
 @{
@@ -23,8 +23,6 @@
 
 <h1>Bio Samples</h1>
 
-<br />
-
 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
 {
     <a class="btn btn-success m-1" asp-action="Create">Add New Entry</a>
@@ -33,10 +31,8 @@
 
 
 <div class="container">
-    <h6>Quick filter for data on this page</h6>
+    <h6>Filter by ALL Bio Samples Data</h6>
     <input class="form-control" id="demo" type="text" placeholder="Enter your search term here...">
-    <br />
-    <p>or, <i>filter on all Bio Sample data by <a asp-area="" asp-controller="BioSamples" asp-action="AllData">clicking here</a></i></p>
     <br>
     <table class="table table-bordered table-striped">
         <thead>
@@ -57,7 +53,7 @@
             </tr>
         </thead>
         <tbody id="test">
-            @foreach (var item in Model.BioSamples)
+            @foreach (var item in Model)
             {
                 <tr>
                     <td>
@@ -81,15 +77,6 @@
             }
         </tbody>
     </table>
-</div>
-
-<div class="text-center">
-    <div page-model="@Model.PagingInfo"
-         page-classes-enabled="true"
-         page-class="btn"
-         page-class-normal="btn-outline-dark"
-         page-class-selected="btn-primary"
-         class="btn-group pull-right m-1"></div>
 </div>
 
 

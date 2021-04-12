@@ -16,16 +16,16 @@
 </header>
 
 <div class="btn-group special" role="group" aria-label="...">
-    <button type="button" class="btn btn-egyptianblue">About Us</button>
-    <button type="button" class="btn btn-uclagold">Middle</button>
-    <button type="button" class="btn btn-cedarchest">Right</button>
-    <button type="button" class="btn btn-brownsugar">Right</button>
+    <a class="btn btn-egyptianblue" href="#the-project">About The Project</a>
+    <a class="btn btn-uclagold" asp-area="" asp-controller="Home" asp-action="PDFData">Field Notes and Data</a>
+    <a class="btn btn-cedarchest" asp-area="" asp-controller="Burials" asp-action="Index">Our Database</a>
+    <a class="btn btn-brownsugar" href="#the-project">OTHER BUTTON</a>
 </div>
 
 <br />
 
 @*Project Information in Card*@
-<div class="card">
+<div class="card" id="the-project">
     <div class="card-header">
         <h3>The Project</h3>
     </div>

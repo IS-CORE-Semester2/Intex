@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="shortcut icon" type="image/x-icon" href="~/img/Logo_BYU_Favicon.ico" />
+    @RenderSection("header", required: false)
 </head>
 <body>
     <header>
@@ -26,7 +27,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="PDFData">PDF Data</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="PDFData">Field Notes and Data</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">View Data</a>
