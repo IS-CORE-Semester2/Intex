@@ -50,40 +50,47 @@
     <tbody>
         @foreach (var item in Model.Cranial2002s)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MaximumCranialLength)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.MaximumCranialBreadth)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BurialPositioningNorthSouthNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BurialPositioningNorthSouthDirection)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BurialPositioningEastWestNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BurialPositioningEastWestDirection)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BurialNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BurialDepth)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BurialSubPlotDirection)
-                </td>
-                <td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaximumCranialLength)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaximumCranialBreadth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialPositioningNorthSouthNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialPositioningNorthSouthDirection)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialPositioningEastWestNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialPositioningEastWestDirection)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialDepth)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialSubPlotDirection)
+            </td>
+            <td>
+                @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                {
                     <a asp-action="Edit" asp-route-id="@item.SampleNumber" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.SampleNumber" class="btn btn-info m-1" style="width: 80px">Details</a>
+                }
+
+                <a asp-action="Details" asp-route-id="@item.SampleNumber" class="btn btn-info m-1" style="width: 80px">Details</a>
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
                     <a asp-action="Delete" asp-route-id="@item.SampleNumber" class="btn btn-danger m-1" style="width: 80px">Delete</a>
-                </td>
-            </tr>
+                }
+            </td>
+        </tr>
         }
     </tbody>
 </table>
