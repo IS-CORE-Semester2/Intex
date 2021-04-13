@@ -226,5 +226,8 @@ namespace Intex
         {
             return _context.Exhumations.Any(e => e.BurialID == id);
         }
+
+
+
     }
 }

@@ -175,5 +175,13 @@ namespace Intex.Controllers
         {
             return _context.Cranial2002.Any(e => e.SampleNumber == id);
         }
+
+        //tableau stuff
+        public IActionResult Visualization()
+        {
+            return View();
+
+
+        }
     }
 }
