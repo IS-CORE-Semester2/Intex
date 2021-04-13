@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Intex
 {
+    //create the Carbon Dating class to hold DB information
     public partial class C14Data
     {
         [Key]

@@ -6,6 +6,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@*Show off all the data we can in this page*@
+
+@*Will be injected into header to allow the filter to work*@
+
 @section header{
     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -25,6 +29,7 @@
 
 <br />
 
+@*Table with information*@
 <div class="container">
     <h6>Quick filter for data on this page</h6>
     <input class="form-control" id="demo" type="text" placeholder="Enter your search term here...">

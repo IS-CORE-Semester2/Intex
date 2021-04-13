@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Intex.Models
 {
+	//DBContext class to facilitate interactions with the DB
     public class BioSamplesDbContext : DbContext
 	{
 		public BioSamplesDbContext(DbContextOptions<BioSamplesDbContext> options) : base(options)

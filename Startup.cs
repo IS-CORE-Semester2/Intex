@@ -57,7 +57,7 @@ namespace Intex
             //##################################################################################################################
 
             ////allow for Google Authentication 
-            ///NEED TO FIGURE OUT HOW TO PUT AND CONNECT A SECRETS VAULT ON AWS
+            ////Not currently implemented but can be added to a later build
             //services.AddAuthentication().AddGoogle(options =>
             //{
             //    IConfigurationSection googleAuthNSection =
@@ -68,7 +68,8 @@ namespace Intex
 
             //##################################################################################################################
 
-            //EMAIL SENDER DOES NOT CURRENTLY WORK BUT CAN BE CONFIGURED TO WORK IN THE FUTURE
+            //EMAIL SENDER
+            ////Not currently implemented but can be added to a later build
             ////set up email verification sender
             //services.AddTransient<IEmailSender, EmailSender>();
             //services.Configure<AuthMessageSenderOptions>(Configuration);

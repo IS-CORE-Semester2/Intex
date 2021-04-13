@@ -9,7 +9,7 @@ namespace Intex.ViewModels
     public class UserRoleViewModel
     {
         public string UserId { get; set; }
-        //username is email for us
+        //username and email are synonymous for us
         public string UserName { get; set; }
         public bool IsSelected { get; set; }
     }

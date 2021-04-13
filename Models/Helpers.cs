@@ -7,6 +7,7 @@ using System.Web;
 
 namespace Intex.Models
 {
+    //For RDS connection
     public class Helpers
     {
         public static string GetRDSConnectionString()
@@ -17,16 +18,13 @@ namespace Intex.Models
 
             //if (string.IsNullOrEmpty(dbname)) return null;
 
+            //I don't think the info below here is actually used, but the connection works with it there so we are just gonna leave it
             string username = appConfig["EpicWerf"];
             string password = appConfig["JacksonRocks"];
             string hostname = appConfig["aa334sqauw5ixt.cww7zl3zl4yd.us-east-1.rds.amazonaws.com"];
             string port = appConfig["1433"];
 
-            //return "Data Source=" + hostname + ";Initial Catalog=" + dbname + ";User ID=" + username + ";Password=" + password + ";";
             return "Data Source=aaw4kdw5iaqlen.cww7zl3zl4yd.us-east-1.rds.amazonaws.com; Initial Catalog=IntexII;User ID=dbuser;Password=intexgroup29;MultipleActiveResultSets=true;";
-            //"DefaultConnection": "Host=aa334sqauw5ixt.cww7zl3zl4yd.us-east-1.rds.amazonaws.com;Port=1433;Username=EpicWerf;Password=JacksonRocks;Database=aa334sqauw5ixt"
-
-            //return "Data Source=aa15qhx9s42mgmt.chgpbo5ixplt.us-east-1.rds.amazonaws.com;Initial Catalog=ebdb;User ID=dbuser;Password=group211;";
         }
     }
 }

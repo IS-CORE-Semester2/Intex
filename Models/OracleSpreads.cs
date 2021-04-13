@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Intex
 {
+    //create the Oracle Spreadsheet class to hold DB information
     public partial class OracleSpreads
     {
         [Key]

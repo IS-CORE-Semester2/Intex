@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Intex
 {
+    //create the Burials class to hold DB information
     public partial class Burials
     {
         [Key]

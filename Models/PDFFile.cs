@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Intex.Models
 {
+    //create the PDFFile class to hold DB information
     public class PDFFile
     {
         [Key]

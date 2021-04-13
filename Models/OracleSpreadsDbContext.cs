@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Intex.Models
 {
-    public class OracleSpreadsDbContext : DbContext
+	//DBContext class to facilitate interactions with the DB
+	public class OracleSpreadsDbContext : DbContext
 	{
 		public OracleSpreadsDbContext(DbContextOptions<OracleSpreadsDbContext> options) : base(options)
 		{ }

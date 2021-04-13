@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Intex
 {
+    //create the Cranial class to hold DB information
     public partial class Cranial2002
     {
         [Key]

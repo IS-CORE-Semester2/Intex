@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Intex.Models
 {
-    public class Cranial2002DbContext : DbContext
+	//DBContext class to facilitate interactions with the DB
+	public class Cranial2002DbContext : DbContext
 	{
 		public Cranial2002DbContext(DbContextOptions<Cranial2002DbContext> options) : base(options)
 		{

@@ -5,8 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@*Allow a researcher or admin to create a new entry*@
+
 <h1>New Exhumation Entry</h1>
 
+@*form to allow creation of new entry*@
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -27,7 +30,7 @@
                 <select asp-for="BurialLocationNS" class="form-control">
                     <option value="N">N</option>
                     <option value="S">S</option>
-                </select>                
+                </select>
                 <span asp-validation-for="BurialLocationNS" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -45,7 +48,7 @@
                 <select asp-for="BurialLocationEW" class="form-control">
                     <option value="E">E</option>
                     <option value="W">W</option>
-                </select>                   
+                </select>
                 <span asp-validation-for="BurialLocationEW" class="text-danger"></span>
             </div>
             <div class="form-group">

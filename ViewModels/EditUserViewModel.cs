@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Intex.ViewModels
 {
+    //edit a user in the Db. make sure to pull in and update any claims (not currently in use) or roles they have
     public class EditUserViewModel
     {
         public EditUserViewModel()

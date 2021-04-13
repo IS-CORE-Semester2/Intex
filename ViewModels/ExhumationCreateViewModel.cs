@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Intex.ViewModels
 {
+
+    //Both a model and a viemwmodel are used to store an exhumation
+    //this is what is required when using an IFormFile (like below) to store Photo information
     public class ExhumationCreateViewModel
     {
         [Required]

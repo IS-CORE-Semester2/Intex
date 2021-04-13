@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace Intex.Models
 {
+    //filters class to hold filtering information.
+    //Not currently in use but could be implemented in a later build
     public class Filters
     {
         public Filters(string filterstring)

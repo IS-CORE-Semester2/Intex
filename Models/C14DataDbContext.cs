@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Intex.Models
 {
-    public class C14DataDbContext : DbContext
+	//DBContext class to facilitate interactions with the DB
+	public class C14DataDbContext : DbContext
 	{
 		public C14DataDbContext(DbContextOptions<C14DataDbContext> options) : base(options)
 		{

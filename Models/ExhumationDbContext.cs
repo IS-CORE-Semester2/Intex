@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Intex.Models
 {
-    public class ExhumationDbContext : DbContext
+	//DBContext class to facilitate interactions with the DB
+	public class ExhumationDbContext : DbContext
 	{
 		public ExhumationDbContext(DbContextOptions<ExhumationDbContext> options) : base(options)
 		{ }

@@ -7,10 +7,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@*Display a sexy masthead image to welcome the user to the page*@
 @section masthead{
     <partial name="_BigOlPicturesPartial" />
 }
 
+@*Add in these scripts to allow filter box to work*@
 @section header{
     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -26,6 +28,7 @@
     </script>
 }
 
+@*Allow ability to add new entry for admins and researchers*@
 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
 {
     <a class="btn btn-egyptianblue m-1" asp-action="Create">Add New Entry</a>
@@ -34,6 +37,7 @@
 
 <br />
 
+@*Search box for filtering, table to display all information*@
 <div class="container">
     <h6>Quick filter for data on this page</h6>
     <input class="form-control" id="demo" type="text" placeholder="Enter your search term here...">

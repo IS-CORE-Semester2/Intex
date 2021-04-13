@@ -1,15 +1,17 @@
 ﻿@{
-ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
-@inject SignInManager<IdentityUser> signInManager;
-@model IEnumerable<PDFFile>
+    ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
+    @inject SignInManager<IdentityUser> signInManager;
+    @model IEnumerable<PDFFile>
 }
 
+@*Display a sexy masthead image to welcome the user to the page*@
 @section masthead{
     <partial name="_BigOlPicturesPartial" />
 }
 
 <br />
 
+@*Show an accordian style menu with selections of what a user can download*@
 <div id="accordion">
     <div class="card">
         <div class="card-header" id="headingOne">
@@ -20,6 +22,7 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
             </h5>
         </div>
 
+        @*Only pull the PDFs if the correct file type is given. Otherwise do nothing with them. they will be used in the following accordians*@
         <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
             <div class="card-body">
                 @foreach (var p in Model)
@@ -30,6 +33,7 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
 
                             <a href="~/pdf/Osteology Data/@p.Path" class="btn btn-outline-dark form-control" target="_blank">@p.Name</a>
 
+                            @*Allow an admin to delete an entry*@
                             @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                             {
                                 <form asp-action="DeleteFile" method="post">
@@ -38,7 +42,7 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
                                         <span>Are you sure you want to delete?</span>
                                         <button type="submit" class="btn btn-cedarchest">Yes</button>
                                         <a href="#" class="btn btn-secondary"
-                                            onclick="confirmDelete('@p.Id', false)">No</a>
+                                           onclick="confirmDelete('@p.Id', false)">No</a>
                                     </span>
                                     <span id="deleteSpan_@p.Id">
                                         <a href="#" class="btn btn-cedarchest form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
@@ -49,13 +53,14 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
                     }
                 }
 
+                @*Allow an admin to add an entry*@
                 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                 {
                     <a class="btn btn-egyptianblue m-1"
-                        asp-controller="Home"
-                        asp-action="PDFDataUpload"
-                        asp-route-category="Osteology Data"
-                        asp-route-fileId="1">Add a New Entry</a>
+                       asp-controller="Home"
+                       asp-action="PDFDataUpload"
+                       asp-route-category="Osteology Data"
+                       asp-route-fileId="1">Add a New Entry</a>
                 }
             </div>
         </div>
@@ -68,6 +73,8 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
                 </button>
             </h5>
         </div>
+
+        @*Only pull the PDFs if the correct file type is given. Otherwise do nothing with them. they will be used in the following accordians*@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
             <div class="card-body">
                 @foreach (var p in Model)
@@ -78,6 +85,7 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
 
                             <a href="~/pdf/Field Books/@p.Path" class="btn btn-outline-dark form-control" target="_blank">@p.Name</a>
 
+                            @*Allow an admin to delete an entry*@
                             @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                             {
                                 <form asp-action="DeleteFile" method="post">
@@ -86,7 +94,7 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
                                         <span>Are you sure you want to delete?</span>
                                         <button type="submit" class="btn btn-cedarchest">Yes</button>
                                         <a href="#" class="btn btn-secondary"
-                                            onclick="confirmDelete('@p.Id', false)">No</a>
+                                           onclick="confirmDelete('@p.Id', false)">No</a>
                                     </span>
                                     <span id="deleteSpan_@p.Id">
                                         <a href="#" class="btn btn-cedarchest form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
@@ -97,13 +105,14 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
                     }
                 }
 
+                @*Allow an admin to add an entry*@
                 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                 {
                     <a class="btn btn-egyptianblue m-1"
-                        asp-controller="Home"
-                        asp-action="PDFDataUpload"
-                        asp-route-category="Field Book"
-                        asp-route-fileId="2">Add a New Entry</a>
+                       asp-controller="Home"
+                       asp-action="PDFDataUpload"
+                       asp-route-category="Field Book"
+                       asp-route-fileId="2">Add a New Entry</a>
                 }
             </div>
         </div>
@@ -116,6 +125,8 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
                 </button>
             </h5>
         </div>
+
+        @*Only pull the PDFs if the correct file type is given. Otherwise do nothing with them. they will be used in the following accordians*@
         <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
             <div class="card-body">
                 @foreach (var p in Model)
@@ -126,6 +137,7 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
 
                             <a href="~/pdf/Archaeological Database Articles/@p.Path" class="btn btn-outline-dark form-control" target="_blank">@p.Name</a>
 
+                            @*Allow an admin to delete an entry*@
                             @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                             {
                                 <form asp-action="DeleteFile" method="post">
@@ -134,7 +146,7 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
                                         <span>Are you sure you want to delete?</span>
                                         <button type="submit" class="btn btn-cedarchest">Yes</button>
                                         <a href="#" class="btn btn-secondary"
-                                            onclick="confirmDelete('@p.Id', false)">No</a>
+                                           onclick="confirmDelete('@p.Id', false)">No</a>
                                     </span>
                                     <span id="deleteSpan_@p.Id">
                                         <a href="#" class="btn btn-cedarchest form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
@@ -145,13 +157,14 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
                     }
                 }
 
+                @*Allow an admin to add an entry*@
                 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                 {
                     <a class="btn btn-egyptianblue m-1"
-                        asp-controller="Home"
-                        asp-action="PDFDataUpload"
-                        asp-route-category="Archaeological Database Article"
-                        asp-route-fileId="3">Add a New Entry</a>
+                       asp-controller="Home"
+                       asp-action="PDFDataUpload"
+                       asp-route-category="Archaeological Database Article"
+                       asp-route-fileId="3">Add a New Entry</a>
                 }
             </div>
         </div>
@@ -164,6 +177,7 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
                 </button>
             </h5>
         </div>
+        @*Catch all if what a researcher wants to upload doesn't fit in with the previous sections*@
         <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordion">
             <div class="card-body">
                 @foreach (var p in Model)
@@ -174,6 +188,7 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
 
                             <a href="~/pdf/Misc Data/@p.Path" class="btn btn-outline-dark form-control" target="_blank">@p.Name</a>
 
+                            @*Allow an admin to delete an entry*@
                             @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                             {
                                 <form asp-action="DeleteFile" method="post">
@@ -182,7 +197,7 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
                                         <span>Are you sure you want to delete?</span>
                                         <button type="submit" class="btn btn-cedarchest">Yes</button>
                                         <a href="#" class="btn btn-secondary"
-                                            onclick="confirmDelete('@p.Id', false)">No</a>
+                                           onclick="confirmDelete('@p.Id', false)">No</a>
                                     </span>
                                     <span id="deleteSpan_@p.Id">
                                         <a href="#" class="btn btn-cedarchest form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
@@ -193,13 +208,14 @@ ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
                     }
                 }
 
+                @*Allow an admin to add an entry*@
                 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                 {
                     <a class="btn btn-egyptianblue m-1"
-                        asp-controller="Home"
-                        asp-action="PDFDataUpload"
-                        asp-route-category="Other"
-                        asp-route-fileId="4">Add a New Entry</a>
+                       asp-controller="Home"
+                       asp-action="PDFDataUpload"
+                       asp-route-category="Other"
+                       asp-route-fileId="4">Add a New Entry</a>
                 }
             </div>
         </div>

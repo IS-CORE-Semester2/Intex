@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace Intex.ViewModels
 {
+    //used for pagination to get and set number of items per page
     public class PagingInfo
     {
         public int TotalNumItems { get; set; }

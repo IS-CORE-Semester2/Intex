@@ -4,7 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-//this will be part of sending a confirmation email if we get that working
+//Sending a confirmation email 
+//not currently in use but oculd be implemented in a later build
 namespace Intex.Services
 {
     public class AuthMessageSenderOptions

@@ -9,12 +9,14 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="shortcut icon" type="image/x-icon" href="~/img/logo_byu_excavations.ico" />
+    @*Add in additional header information if needed*@
     @RenderSection("header", required: false)
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
+                @*Pull in the cute little logo and st up the navigation bar*@
                 <img width="45px" height="auto" src="~/img/Logo_BYU_Excavations.jpg" style="position:relative;top:0px">
                 <a class="navbar-brand ml-3" asp-area="" asp-controller="Home" asp-action="Index">Fag el-Gamous</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -60,19 +62,20 @@
             </div>
         </nav>
 
+        @*Put the masthead on each page that calls it*@
         @RenderSection("masthead", required: false)
     </header>
 
+    @*Main portion of website*@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
+    @*Footer with scripts and information*@
     <footer class="border-top footer text-muted bg-white">
-        <div class="container">
-            &copy; 2021 - Intex Group 2-9
-        </div>
+        <div class="container">&copy; 2021 - Intex Group 2-9</div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
