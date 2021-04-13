@@ -28,14 +28,6 @@
         });
     </script>
 }
-
-@*Allow ability to add new entry for admins and researchers*@
-@if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
-{
-    <a class="btn btn-egyptianblue m-1" asp-action="Create">Add New Entry</a>
-    <br />
-}
-
 <br />
 
 @*Search box for filtering, table to display all information*@
@@ -51,52 +43,59 @@
             </h5>
         </div>
     </div>
+    <br />
 
+    @*Allow ability to add new entry for admins and researchers*@
+    @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+    {
+        <a class="btn btn-egyptianblue m-1" asp-action="Create">Add New Entry</a>
         <br />
+    }
+    <br />
 
-        <table class="table table-bordered table-striped">
-            <thead>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Rack Number</th>
+                <th>Burial Subplot</th>
+                <th>Burial Number</th>
+                <th>Date</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="test">
+            @foreach (var item in Model.BioSamples)
+            {
                 <tr>
-                    <th>Rack Number</th>
-                    <th>Burial Subplot</th>
-                    <th>Burial Number</th>
-                    <th>Date</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody id="test">
-                @foreach (var item in Model.BioSamples)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.RackNumber)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.BurialSubplot)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.BurialNumber)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Date)
-                        </td>
-                        <td>
-                            @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
-                            {
-                                <a asp-action="Edit" asp-route-id="@item.BioSampleId" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
-                            }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.RackNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BurialSubplot)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BurialNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.BioSampleId" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
+                        }
 
-                            <a asp-action="Details" asp-route-id="@item.BioSampleId" class="btn btn-brownsugar m-1" style="width: 80px">Details</a>
-                            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                            {
-                                <a asp-action="Delete" asp-route-id="@item.BioSampleId" class="btn btn-cedarchest m-1" style="width: 80px">Delete</a>
-                            }
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
+                        <a asp-action="Details" asp-route-id="@item.BioSampleId" class="btn btn-brownsugar m-1" style="width: 80px">Details</a>
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.BioSampleId" class="btn btn-cedarchest m-1" style="width: 80px">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
     <div class="text-center">
         <div page-model="@Model.PagingInfo"

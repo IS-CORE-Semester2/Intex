@@ -33,75 +33,12 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.LowPairNS)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HighPairNS)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BurialLocationNS)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LowPairEW)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HighPairEW)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BurialLocationEW)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Area)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ShaftNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BurialNumber)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SouthToHeadInMeters)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SouthToFeetInMeters)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.WestToHeadInMeters)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.WestToFeetInMeters)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LengthInMeters)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DepthInMeters)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PhotoPath)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BurialGoods)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Hair)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Age)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BurialMaterials)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ExcavationRecorder)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Date)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Time)
-                </th>
+                <th>Burial Location</th>
+                <th>Length</th>
+                <th>Depth</th>
+                <th>Hair</th>
+                <th>Age</th>
+                <th>Burial Materials</th>
                 <th></th>
             </tr>
         </thead>
@@ -110,55 +47,13 @@
             {
                 <tr>
                     <td>
-                        @Html.DisplayFor(modelItem => item.LowPairNS)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HighPairNS)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BurialLocationNS)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LowPairEW)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.HighPairEW)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BurialLocationEW)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Area)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ShaftNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BurialNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SouthToHeadInMeters)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.SouthToFeetInMeters)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.WestToHeadInMeters)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.WestToFeetInMeters)
+                        @Html.DisplayFor(modelItem => item.LowPairNS)/@Html.DisplayFor(modelItem => item.HighPairNS) @Html.DisplayFor(modelItem => item.BurialLocationNS) @Html.DisplayFor(modelItem => item.LowPairEW)/@Html.DisplayFor(modelItem => item.HighPairEW) @Html.DisplayFor(modelItem => item.BurialLocationEW)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.LengthInMeters)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.DepthInMeters)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.PhotoPath)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BurialGoods)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Hair)
@@ -168,15 +63,6 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.BurialMaterials)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.ExcavationRecorder)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Date)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Time)
                     </td>
                     <td>
                         @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))

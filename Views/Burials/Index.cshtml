@@ -27,14 +27,6 @@
         });
     </script>
 }
-
-@*Allow ability to add new entry for admins and researchers*@
-@if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
-{
-    <a class="btn btn-egyptianblue m-1" asp-action="Create">Add New Entry</a>
-    <br />
-}
-
 <br />
 
 @*Search box for filtering, table to display all information*@
@@ -49,7 +41,14 @@
             </h5>
         </div>
     </div>
+    <br />
 
+    @*Allow ability to add new entry for admins and researchers*@
+    @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+    {
+        <a class="btn btn-egyptianblue m-1" asp-action="Create">Add New Entry</a>
+        <br />
+    }
     <br />
 
     <table class="table table-bordered table-striped">
