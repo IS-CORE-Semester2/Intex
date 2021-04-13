@@ -73,7 +73,7 @@ body {
 .masthead {
     height: 100vh;
     min-height: 500px;
-    background-image: url("../img/Egypt_Masthead.jpeg");
+    background-image: url("../img/Egypt_Masthead_OG.jpeg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -260,3 +260,10 @@ body {
         .show > .btn-brownsugar.dropdown-toggle:focus {
             box-shadow: 0 0 0 0.2rem rgba(176, 116, 74, 0.5);
         }
+
+.extendfull, .extendleft, .extendright {
+    position: relative;
+    display: inline;
+    float: left;
+    width: 100%;
+}

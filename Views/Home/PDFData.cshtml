@@ -4,13 +4,24 @@
     @model IEnumerable<PDFFile>
 }
 
+@section masthead{
+    <div>
+
+        <img class="img-fluid rounded" src="~/img/13 February 2007 087_Cropped.jpg" />
+
+        <div class="btn-group special" role="group" aria-label="...">
+            <a class="btn btn-egyptianblue" asp-area="" asp-controller="Home" asp-action="Index">About The Project</a>
+            <a class="btn btn-uclagold" asp-area="" asp-controller="Home" asp-action="PDFData">Field Notes and Data</a>
+            <a class="btn btn-cedarchest" asp-area="" asp-controller="Burials" asp-action="Index">Our Database</a>
+            <a class="btn btn-brownsugar" href="https://byu.maps.arcgis.com/apps/CEWebViewer/viewer.html?3dWebScene=b97ad484af45498cacabc2bb9d43390b">Mummy Map</a>
+        </div>
+    </div>
+}
+
+<br />
 
 <h1>Downloadable PDF Versions of Our Data</h1>
-<br />
 
-<img class="img-fluid rounded" src="~/img/13 February 2007 087.jpg" />
-
-<br />
 <br />
 
 <div id="accordion">
