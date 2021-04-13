@@ -182,11 +182,10 @@ namespace Intex.Controllers
         }
 
         //tableau stuff
+        [AllowAnonymous]
         public IActionResult Visualization()
         {
             return View();
-
-
         }
     }
 }
