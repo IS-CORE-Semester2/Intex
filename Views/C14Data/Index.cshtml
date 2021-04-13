@@ -121,7 +121,6 @@
                         {
                             <a asp-action="Edit" asp-route-id="@item.BurialNumber" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
                         }
-
                         <a asp-action="Details" asp-route-id="@item.BurialNumber" class="btn btn-info m-1" style="width: 80px">Details</a>
                         @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {

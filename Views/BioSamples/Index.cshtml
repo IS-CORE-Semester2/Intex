@@ -21,7 +21,7 @@
     </script>
 }
 
-<h1>Bio Sample Data</h1>
+<h1>Bio Samples</h1>
 
 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
 {
@@ -72,13 +72,13 @@
                     <td>
                         @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                         {
-                            <a asp-action="Edit" asp-route-id="@item.BurialId" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
+                            <a asp-action="Edit" asp-route-id="@item.BioSampleId" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
                         }
 
-                        <a asp-action="Details" asp-route-id="@item.BurialId" class="btn btn-info m-1" style="width: 80px">Details</a>
+                        <a asp-action="Details" asp-route-id="@item.BioSampleId" class="btn btn-info m-1" style="width: 80px">Details</a>
                         @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
-                            <a asp-action="Delete" asp-route-id="@item.BurialId" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                            <a asp-action="Delete" asp-route-id="@item.BioSampleId" class="btn btn-danger m-1" style="width: 80px">Delete</a>
                         }
                     </td>
                 </tr>
@@ -95,12 +95,3 @@
          page-class-selected="btn-primary"
          class="btn-group pull-right m-1"></div>
 </div>
-
-
-
-
-
-
-
-
-
