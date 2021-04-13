@@ -22,18 +22,14 @@ namespace Intex.Controllers
             _context = context;
         }
 
-        // GET: Burials
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.Burials.ToListAsync());
-        //}
+        // GET: Burials index page
+        // add in support for pagination
         [AllowAnonymous]
         public IActionResult Index(int pageNum = 1)
         {
             int pageSize = 10;
-            //rachel's filtering attempt
 
-
+            //create a new index view model to handle the DBSet and pagination
             return View(new IndexViewModel
             {
                 Burials = _context.Burials
@@ -48,6 +44,13 @@ namespace Intex.Controllers
                     TotalNumItems = (_context.Burials.Count())
                 },
             });
+        }
+
+        //Page to filter by ALL data in a database
+        [AllowAnonymous]
+        public IActionResult AllData()
+        {
+            return View(_context.Burials);
         }
 
         // GET: Burials/Details/5

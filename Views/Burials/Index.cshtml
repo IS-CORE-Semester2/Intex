@@ -3,7 +3,12 @@
 
 @{
     ViewData["Title"] = "Burials";
+    ViewData["Description"] = "Contains the majority of our data. Will soon be replaced by 'Exhumations'";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section masthead{
+    <partial name="_BigOlPicturesPartial" />
 }
 
 @section header{
@@ -21,36 +26,36 @@
     </script>
 }
 
-<h1>Burials</h1>
-
 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
 {
-    <a class="btn btn-success m-1" asp-action="Create">Add New Entry</a>
+    <a class="btn btn-egyptianblue m-1" asp-action="Create">Add New Entry</a>
     <br />
 }
+
+<br />
 
 <div class="container">
     <h6>Quick filter for data on this page</h6>
     <input class="form-control" id="demo" type="text" placeholder="Enter your search term here...">
     <br />
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <a class="btn" asp-area="" asp-controller="Burials" asp-action="AllData">You can also filter on all Burials data by clicking here</a>
+            </h5>
+        </div>
+    </div>
+
+    <br />
+
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>
-                    Burial Number
-                </th>
-                <th>
-                    Burial Location
-                </th>
-                <th>
-                    Burial Depth
-                </th>
-                <th>
-                    Burial Situation
-                </th>
-                <th>
-                    Date Found
-                </th>
+                <th>Burial Number</th>
+                <th>Burial Location</th>
+                <th>Burial Depth</th>
+                <th>Burial Situation</th>
+                <th>Date Found</th>
                 <th></th>
             </tr>
         </thead>
@@ -90,10 +95,10 @@
                             <a asp-action="Edit" asp-route-id="@item.BurialId" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
                         }
 
-                        <a asp-action="Details" asp-route-id="@item.BurialId" class="btn btn-info m-1" style="width: 80px">Details</a>
+                        <a asp-action="Details" asp-route-id="@item.BurialId" class="btn btn-brownsugar m-1" style="width: 80px">Details</a>
                         @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
-                            <a asp-action="Delete" asp-route-id="@item.BurialId" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                            <a asp-action="Delete" asp-route-id="@item.BurialId" class="btn btn-cedarchest m-1" style="width: 80px">Delete</a>
                         }
                     </td>
                 </tr>
@@ -102,12 +107,12 @@
     </table>
 </div>
 
-    <div class="text-center">
-        <div page-model="@Model.PagingInfo"
-             page-classes-enabled="true"
-             page-class="btn"
-             page-class-normal="btn-outline-dark"
-             page-class-selected="btn-primary"
-             class="btn-group pull-right m-1"></div>
-    </div>
+<div class="text-center">
+    <div page-model="@Model.PagingInfo"
+         page-classes-enabled="true"
+         page-class="btn"
+         page-class-normal="btn-outline-dark"
+         page-class-selected="btn-egyptianblue"
+         class="btn-group pull-right m-1"></div>
+</div>
 

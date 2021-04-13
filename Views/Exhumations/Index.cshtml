@@ -3,8 +3,14 @@
 
 @{
     ViewData["Title"] = "Exhumations";
+    ViewData["Description"] = "Our most updated database. Come here to see all of our latest and greatest data";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section masthead{
+    <partial name="_BigOlPicturesPartial" />
+}
+
 
 @section header{
     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
@@ -21,40 +27,39 @@
     </script>
 }
 
-<h1>Exhumation Data</h1>
-
 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
 {
-    <a class="btn btn-success m-1" asp-action="Create">Add New Entry</a>
+    <a class="btn btn-egyptianblue m-1" asp-action="Create">Add New Entry</a>
     <br />
 }
 
+<br />
+
 <div class="container">
-    <h6>Quick filter for data on this page</h6>
+    <h5>Quick filter for data on this page</h5>
     <input class="form-control" id="demo" type="text" placeholder="Enter your search term here...">
     <br />
-    <p>Or, <i>filter on all Exhumation data by <a asp-area="" asp-controller="Exhumations" asp-action="AllData">clicking here</a></i></p>
+
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <a class="btn" asp-area="" asp-controller="Exhumations" asp-action="AllData">You can also filter on all Exhumation data by clicking here</a>
+            </h5>
+        </div>
+    </div>    
+    
     <br />
+
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>
-                    Burial Location
-                <th>
-                    Length
-                </th>
-                <th>
-                    Depth
-                </th>
-                <th>
-                    Hair
-                </th>
-                <th>
-                    Age
-                </th>
-                <th>
-                    Burial Materials
-                </th>
+                <th>Burial Location</th>
+                <th>Length</th>
+                <th>Depth</th>
+                <th>Hair</th>
+                <th>Age</th>
+                <th>Burial Materials</th>
+                <th></th>
             </tr>
         </thead>
         <tbody id="test">
@@ -85,10 +90,10 @@
                             <a asp-action="Edit" asp-route-id="@item.BurialID" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
                         }
 
-                        <a asp-action="Details" asp-route-id="@item.BurialID" class="btn btn-info m-1" style="width: 80px">Details</a>
+                        <a asp-action="Details" asp-route-id="@item.BurialID" class="btn btn-brownsugar m-1" style="width: 80px">Details</a>
                         @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
-                            <a asp-action="Delete" asp-route-id="@item.BurialID" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                            <a asp-action="Delete" asp-route-id="@item.BurialID" class="btn btn-cedarchest m-1" style="width: 80px">Delete</a>
                         }
                     </td>
                 </tr>
@@ -103,6 +108,6 @@
          page-classes-enabled="true"
          page-class="btn"
          page-class-normal="btn-outline-dark"
-         page-class-selected="btn-primary"
+         page-class-selected="btn-egyptianblue"
          class="btn-group pull-right m-1"></div>
 </div>

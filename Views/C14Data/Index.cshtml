@@ -3,7 +3,12 @@
 
 @{
     ViewData["Title"] = "Carbon Dating";
+    ViewData["Description"] = "Mummies that have been brought to the United States to have additional testing performed";
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section masthead{
+    <partial name="_BigOlPicturesPartial" />
 }
 
 @section header{
@@ -21,13 +26,13 @@
     </script>
 }
 
-<h1>Carbon Dating Data</h1>
-
 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
 {
-    <a class="btn btn-success m-1" asp-action="Create">Add New Entry</a>
+    <a class="btn btn-egyptianblue m-1" asp-action="Create">Add New Entry</a>
     <br />
 }
+
+<br />
 
 <div class="container">
     <h6>Quick filter for data on this page</h6>
@@ -37,18 +42,16 @@
         <thead>
             <tr>
                 <th>Rack</th>
-                <th>North South Number</th>
-                <th>North South Letter</th>
-                <th>East West Number</th>
-                <td>East West Letter</td>
-                <td>Square</td>
-                <td>Description</td>
-                <td>Location</td>
-                <td>Category</td>
-                <td>Notes</td>
+                <th>Burial Location</th>
+                <th>Square</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Category</th>
+                <th>Notes</th>
                 <th></th>
             </tr>
-        </thead>
+        </thead>    
+        
         <tbody id="test">
             @foreach (var item in Model.C14Datas)
             {
@@ -57,16 +60,7 @@
                         @Html.DisplayFor(modelItem => item.Rack)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.NorthSouthNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NorthSouthLetter)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EastWestNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.EastWestLetter)
+                        @Html.DisplayFor(modelItem => item.NorthSouthNumber)@Html.DisplayFor(modelItem => item.NorthSouthLetter) / @Html.DisplayFor(modelItem => item.EastWestNumber)@Html.DisplayFor(modelItem => item.EastWestLetter)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Square)
@@ -88,12 +82,12 @@
                         {
                             <a asp-action="Edit" asp-route-id="@item.BurialNumber" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
                         }
-                        <a asp-action="Details" asp-route-id="@item.BurialNumber" class="btn btn-info m-1" style="width: 80px">Details</a>
+                        <a asp-action="Details" asp-route-id="@item.BurialNumber" class="btn btn-brownsugar m-1" style="width: 80px">Details</a>
                         @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
-                            <a asp-action="Delete" asp-route-id="@item.BurialNumber" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                            <a asp-action="Delete" asp-route-id="@item.BurialNumber" class="btn btn-cedarchest m-1" style="width: 80px">Delete</a>
                         }
-                    </td>                
+                    </td>
                 </tr>
             }
         </tbody>
@@ -102,9 +96,9 @@
 
 <div class="text-center">
     <div page-model="@Model.PagingInfo"
-            page-classes-enabled="true"
-            page-class="btn"
-            page-class-normal="btn-outline-dark"
-            page-class-selected="btn-primary"
-            class="btn-group pull-right m-1"></div>
+         page-classes-enabled="true"
+         page-class="btn"
+         page-class-normal="btn-outline-dark"
+         page-class-selected="btn-egyptianblue"
+         class="btn-group pull-right m-1"></div>
 </div>

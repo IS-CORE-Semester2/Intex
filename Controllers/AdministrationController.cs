@@ -260,30 +260,6 @@ namespace Intex.Controllers
             return View(roles);
         }
 
-        //Below is basically the same as above but with pagination if I can figure that out
-        ////Get request to list all created roles
-        //[HttpGet]
-        //public IActionResult ListRoles(int pageNum = 1)
-        //{
-        //    int pageSize = 10;
-        //    var roles = roleManager.Roles;
-
-        //    return View(new IndexViewModel
-        //    {
-        //        Roles = roleManager.Roles
-        //            .Skip((pageNum - 1) * pageSize)
-        //            .Take(pageSize)
-        //            .ToList(),
-
-        //        PagingInfo = new PagingInfo
-        //        {
-        //            CurrentPage = pageNum,
-        //            ItemsPerPage = pageSize,
-        //            TotalNumItems = (roleManager.Roles.Count())
-        //        },
-        //    });
-        //}
-
         //get request to edit a single role that has already been created
         //also provide early framework to add/remove users from that single role
         [HttpGet]
@@ -492,9 +468,7 @@ namespace Intex.Controllers
                     ViewBag.ErrorMessage = $"{role.Name} role cannot be deleted as there are users in this role. If you want to delete this role, please remove the users from the role and then try to delete";
                     return View("Error");
                 }
-
             }
         }
-
     }
 }

@@ -7,6 +7,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+//startup file to handle authentication
+
 [assembly: HostingStartup(typeof(Intex.Areas.Identity.IdentityHostingStartup))]
 namespace Intex.Areas.Identity
 {

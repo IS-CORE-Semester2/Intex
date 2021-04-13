@@ -13,10 +13,14 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Intex
 {
+    //lock down controller so only admins and researchers can access MOST actions.
+    //other actions can be unlocked by adding the "AllowAnonymous" tag helper
     [Authorize(Roles = "Admin,Researcher")]
     public class ExhumationsController : Controller
     {
         private readonly ExhumationDbContext _context;
+
+        //hosting environment will help us with saving pictures and pictures paths
         private readonly IHostingEnvironment hostingEnvironment;
 
         public ExhumationsController(ExhumationDbContext context, IHostingEnvironment hostingEnvironment)
@@ -25,16 +29,13 @@ namespace Intex
             this.hostingEnvironment = hostingEnvironment;
         }
 
-        //// GET: Exhumations
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.Exhumations.ToListAsync());
-        //}
+        //Allow anonymous access to this action
         [AllowAnonymous]
         public IActionResult Index(int pageNum = 1)
         {
             int pageSize = 10;
 
+            //create a new index view model to handle the DBSet and pagination
             return View(new IndexViewModel
             {
                 Exhumations = _context.Exhumations
@@ -76,27 +77,13 @@ namespace Intex
             return View();
         }
 
-        // POST: Exhumations/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("BurialID,LowPairNS,HighPairNS,BurialLocationNS,LowPairEW,HighPairEW,BurialLocationEW,Area,ShaftNumber,BurialNumber,SouthToHeadInMeters,SouthToFeetInMeters,WestToHeadInMeters,WestToFeetInMeters,LengthInMeters,DepthInMeters,PhotoPath,BurialGoods,Hair,Age,BurialMaterials,ExcavationRecorder,Date,Time")] Exhumation exhumation)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(exhumation);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(exhumation);
-        //}
-
         [HttpPost]
         public IActionResult Create(ExhumationCreateViewModel model)
         {
             if (ModelState.IsValid)
             {
+                //generate a unique file name (using Guid) for the photo being saved (so that it doesn't overwrite any already saved)
+                //save photos in the img/Exhumations folder
                 string uniqueFileName = null;
                 if (model.Photo != null)
                 {
@@ -106,6 +93,7 @@ namespace Intex
                     model.Photo.CopyTo(new FileStream(filePath, FileMode.Create));
                 }
 
+                //copy all the existing exhumation data, along with the newly created photopath, to a new exhumation entry
                 Exhumation newExhumation = new Exhumation
                 {
                     LowPairNS = model.LowPairNS,
@@ -133,9 +121,11 @@ namespace Intex
                     Time = model.Time
                 };
 
+                //add the new entry to the database and save it
                 _context.Exhumations.Add(newExhumation);
                 _context.SaveChanges();
 
+                //send the person to the details page of what they just created
                 return RedirectToAction("Details", new { id = newExhumation.BurialID });
             }
 
@@ -194,6 +184,7 @@ namespace Intex
             return View(exhumation);
         }
 
+        [AllowAnonymous]
         //Page to filter by ALL data in a database
         public IActionResult AllData()
         {

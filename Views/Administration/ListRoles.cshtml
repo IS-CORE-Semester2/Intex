@@ -33,13 +33,13 @@
                 <a class="btn btn-secondary" asp-controller="Administration" asp-action="EditRole" asp-route-id="@role.Id">Edit</a>
                 <span id="confirmDeleteSpan_@role.Id" style="display:none">
                     <span>Are you sure you want to delete?</span>
-                    <button type="submit" class="btn btn-danger">Yes</button>
+                    <button type="submit" class="btn btn-cedarchest">Yes</button>
                     <a href="#" class="btn btn-primary"
                        onclick="confirmDelete('@role.Id', false)">No</a>
                 </span>
 
                 <span id="deleteSpan_@role.Id">
-                    <a href="#" class="btn btn-danger"
+                    <a href="#" class="btn btn-cedarchest"
                        onclick="confirmDelete('@role.Id', true)">Delete</a>
                 </span>
             </form>

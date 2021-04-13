@@ -1,26 +1,12 @@
 ﻿@{
-    ViewData["Title"] = "PDFs";
-    @inject SignInManager<IdentityUser> signInManager;
-    @model IEnumerable<PDFFile>
+ViewData["Title"] = "Field Books, Bone Books, Archealogical Articles, and More";
+@inject SignInManager<IdentityUser> signInManager;
+@model IEnumerable<PDFFile>
 }
 
 @section masthead{
-    <div>
-
-        <img class="img-fluid rounded" src="~/img/13 February 2007 087_Cropped.jpg" />
-
-        <div class="btn-group special" role="group" aria-label="...">
-            <a class="btn btn-egyptianblue" asp-area="" asp-controller="Home" asp-action="Index">About The Project</a>
-            <a class="btn btn-uclagold" asp-area="" asp-controller="Home" asp-action="PDFData">Field Notes and Data</a>
-            <a class="btn btn-cedarchest" asp-area="" asp-controller="Burials" asp-action="Index">Our Database</a>
-            <a class="btn btn-brownsugar" href="https://byu.maps.arcgis.com/apps/CEWebViewer/viewer.html?3dWebScene=b97ad484af45498cacabc2bb9d43390b">Mummy Map</a>
-        </div>
-    </div>
+    <partial name="_BigOlPicturesPartial" />
 }
-
-<br />
-
-<h1>Downloadable PDF Versions of Our Data</h1>
 
 <br />
 
@@ -50,12 +36,12 @@
                                     <input type="hidden" name="Id" value="@p.Id" />
                                     <span id="confirmDeleteSpan_@p.Id" style="display:none">
                                         <span>Are you sure you want to delete?</span>
-                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                        <button type="submit" class="btn btn-cedarchest">Yes</button>
                                         <a href="#" class="btn btn-secondary"
-                                           onclick="confirmDelete('@p.Id', false)">No</a>
+                                            onclick="confirmDelete('@p.Id', false)">No</a>
                                     </span>
                                     <span id="deleteSpan_@p.Id">
-                                        <a href="#" class="btn btn-danger form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
+                                        <a href="#" class="btn btn-cedarchest form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
                                     </span>
                                 </form>
                             }
@@ -65,11 +51,11 @@
 
                 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                 {
-                    <a class="btn btn-success m-1"
-                       asp-controller="Home"
-                       asp-action="PDFDataUpload"
-                       asp-route-category="Osteology Data"
-                       asp-route-fileId="1">Add a New Entry</a>
+                    <a class="btn btn-egyptianblue m-1"
+                        asp-controller="Home"
+                        asp-action="PDFDataUpload"
+                        asp-route-category="Osteology Data"
+                        asp-route-fileId="1">Add a New Entry</a>
                 }
             </div>
         </div>
@@ -98,12 +84,12 @@
                                     <input type="hidden" name="Id" value="@p.Id" />
                                     <span id="confirmDeleteSpan_@p.Id" style="display:none">
                                         <span>Are you sure you want to delete?</span>
-                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                        <button type="submit" class="btn btn-cedarchest">Yes</button>
                                         <a href="#" class="btn btn-secondary"
-                                           onclick="confirmDelete('@p.Id', false)">No</a>
+                                            onclick="confirmDelete('@p.Id', false)">No</a>
                                     </span>
                                     <span id="deleteSpan_@p.Id">
-                                        <a href="#" class="btn btn-danger form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
+                                        <a href="#" class="btn btn-cedarchest form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
                                     </span>
                                 </form>
                             }
@@ -113,11 +99,11 @@
 
                 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                 {
-                    <a class="btn btn-success m-1"
-                       asp-controller="Home"
-                       asp-action="PDFDataUpload"
-                       asp-route-category="Field Book"
-                       asp-route-fileId="2">Add a New Entry</a>
+                    <a class="btn btn-egyptianblue m-1"
+                        asp-controller="Home"
+                        asp-action="PDFDataUpload"
+                        asp-route-category="Field Book"
+                        asp-route-fileId="2">Add a New Entry</a>
                 }
             </div>
         </div>
@@ -146,12 +132,12 @@
                                     <input type="hidden" name="Id" value="@p.Id" />
                                     <span id="confirmDeleteSpan_@p.Id" style="display:none">
                                         <span>Are you sure you want to delete?</span>
-                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                        <button type="submit" class="btn btn-cedarchest">Yes</button>
                                         <a href="#" class="btn btn-secondary"
-                                           onclick="confirmDelete('@p.Id', false)">No</a>
+                                            onclick="confirmDelete('@p.Id', false)">No</a>
                                     </span>
                                     <span id="deleteSpan_@p.Id">
-                                        <a href="#" class="btn btn-danger form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
+                                        <a href="#" class="btn btn-cedarchest form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
                                     </span>
                                 </form>
                             }
@@ -161,11 +147,11 @@
 
                 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                 {
-                    <a class="btn btn-success m-1"
-                       asp-controller="Home"
-                       asp-action="PDFDataUpload"
-                       asp-route-category="Archaeological Database Article"
-                       asp-route-fileId="3">Add a New Entry</a>
+                    <a class="btn btn-egyptianblue m-1"
+                        asp-controller="Home"
+                        asp-action="PDFDataUpload"
+                        asp-route-category="Archaeological Database Article"
+                        asp-route-fileId="3">Add a New Entry</a>
                 }
             </div>
         </div>
@@ -194,12 +180,12 @@
                                     <input type="hidden" name="Id" value="@p.Id" />
                                     <span id="confirmDeleteSpan_@p.Id" style="display:none">
                                         <span>Are you sure you want to delete?</span>
-                                        <button type="submit" class="btn btn-danger">Yes</button>
+                                        <button type="submit" class="btn btn-cedarchest">Yes</button>
                                         <a href="#" class="btn btn-secondary"
-                                           onclick="confirmDelete('@p.Id', false)">No</a>
+                                            onclick="confirmDelete('@p.Id', false)">No</a>
                                     </span>
                                     <span id="deleteSpan_@p.Id">
-                                        <a href="#" class="btn btn-danger form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
+                                        <a href="#" class="btn btn-cedarchest form-control" onclick="confirmDelete('@p.Id', true)">Delete</a>
                                     </span>
                                 </form>
                             }
@@ -209,11 +195,11 @@
 
                 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
                 {
-                    <a class="btn btn-success m-1"
-                       asp-controller="Home"
-                       asp-action="PDFDataUpload"
-                       asp-route-category="Other"
-                       asp-route-fileId="4">Add a New Entry</a>
+                    <a class="btn btn-egyptianblue m-1"
+                        asp-controller="Home"
+                        asp-action="PDFDataUpload"
+                        asp-route-category="Other"
+                        asp-route-fileId="4">Add a New Entry</a>
                 }
             </div>
         </div>

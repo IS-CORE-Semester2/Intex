@@ -20,6 +20,8 @@ namespace Intex.Controllers
         //pull in DBContext and stuff here
         private readonly ILogger<HomeController> _logger;
         private ApplicationDbContext _context;
+
+        //hosting environment will help us save photos and photo paths
         private readonly IHostingEnvironment hostingEnvironment;
 
         public HomeController(ILogger<HomeController> logger, ApplicationDbContext context, IHostingEnvironment hostingEnvironment)
@@ -31,54 +33,7 @@ namespace Intex.Controllers
 
         //get request for home page
         public IActionResult Index()
-        //public IActionResult Index(string id)
         {
-            //    var filters = new Filters(id);
-            //    ViewBag.Filters = filters;
-            //    ViewBag.BurialLocationNs = _context.Burials.BurialLocationNs.ToList();
-            //    ViewBag.BurialLocationEw = _context.Burials.BurialLocationEw.ToList();
-            //    ViewBag.BurialDepth = _context.Burials.BurialDepth.ToList();
-            //    ViewBag.YearFound = _context.Burials.YearFound.ToList();
-            //    ViewBag.HeadDirection = _context.Burials.HeadDirection.ToList();
-            //    ViewBag.HairColor = _context.Burials.HairColor.ToList();
-            //    ViewBag.HeadDirectionFilters = Filters.HeadDirectionFilterValues;
-
-            //    //confused about how to work this part
-            //    IQueryable<Burials> query = _context.Burials
-            //        .Include(t => t.Category).Include(t => t.Status);
-
-            //    if (filters.HasBurialLocationNs)
-            //    {
-            //        query = query.Where(t => t.BurialLocationNs == filters.BurialLocationNs);
-            //    }
-
-            //    if (filters.HasBurialLocationEw)
-            //    {
-            //        query = query.Where(t => t.BurialLocationEw == filters.BurialLocationEw);
-            //    }
-
-            //    //don't know if we can filter by depth unless we do it as a range
-            //    if (filters.HasBurialDepth)
-            //    {
-            //        query = query.Where(t => t.BurialDepth == filters.BurialDepth);
-            //    }
-            //    if (filters.HasYearFound)
-            //    {
-            //        query = query.Where(t => t.YearFound == filters.YearFound);
-            //    }
-            //    if (filters.HasHeadDirection)
-            //    {
-            //        query = query.Where(t => t.HeadDirection == filters.HeadDirection);
-            //    }
-            //    if (filters.HasHairColor)
-            //    {
-            //        query = query.Where(t => t.HairColor == filters.HairColor);
-            //    }
-
-            //    var burials = query.OrderBy(t => t.YearFound).ToList();
-
-            //    return View(burials);
-            //
             return View();
         }
 
@@ -88,10 +43,11 @@ namespace Intex.Controllers
             return View(_context.PDFFiles);
         }
 
-
+        //get request for data upload page
         [HttpGet]
         public IActionResult PDFDataUpload(int fileId, string category)
         {
+            //pass in the category and fileId for the accordian menu that the user clicked on. Save to viewbag for use in post request
             ViewBag.fileId = fileId;
             ViewBag.category = category;
 
@@ -102,6 +58,7 @@ namespace Intex.Controllers
         [HttpPost]
         public IActionResult PDFDataUpload(PDFUploadViewModel model, int fileId, string category)
         {
+            //error catcher. If the user clicked the "upload" button without selecting a file, return to them the same page, and pass the category and fileId so those don't get los
             if(model.PDFFiles == null)
             {
                 ViewBag.fileId = fileId;
@@ -110,6 +67,7 @@ namespace Intex.Controllers
                 return View();
             }
 
+            //save the file the user wants to upload to the correct place on the server
             if (ModelState.IsValid)
             {
                 string uniqueFileName = null;
@@ -118,6 +76,7 @@ namespace Intex.Controllers
                 {
                     string uploadsFolder = null;
 
+                    //create the correct path to save the file based on which accordian box the user clicked on
                     if (fileId == 1)
                     {
                         uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "pdf/Osteology Data");
@@ -140,6 +99,7 @@ namespace Intex.Controllers
                     model.PDFFiles.CopyTo(new FileStream(filePath, FileMode.Create));
                 }
 
+                //create a new pdf file object. Save the path, name, and FileId
                 PDFFile newPDFFile = new PDFFile
                 {
                     Path = uniqueFileName,
@@ -147,23 +107,30 @@ namespace Intex.Controllers
                     FileId = fileId
                 };
 
+                //add the object to the database and save it
                 _context.PDFFiles.Add(newPDFFile);
                 _context.SaveChanges();
+
+                //return the user to the PDF data page with the context file
                 return RedirectToAction("PDFData", _context.PDFFiles);
             }
             return View();
         }
 
-        //Post request to delete a file from the DB
+        //Post request to delete a file from the DB. Only allow an Admin to do this
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteFile(int id)
         {
+            //get the file to delete form the database based on the Id
             PDFFile fileToDelete = _context.PDFFiles.Where(p => p.Id == id).FirstOrDefault();
 
+            //remove the file, save the changes
             _context.PDFFiles.Remove(fileToDelete);
             _context.SaveChanges();
-            return View("PDFData", _context.PDFFiles);
-            
+
+            //return the view with the PDF table information
+            return View("PDFData", _context.PDFFiles);            
         }
 
 
