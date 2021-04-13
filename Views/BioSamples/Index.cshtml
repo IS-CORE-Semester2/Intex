@@ -3,7 +3,13 @@
 
 @{
     ViewData["Title"] = "Bio Samples";
+    ViewData["Description"] = "Excavated mummies that have been brought back to BYU";
+
     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section masthead{
+    <partial name="_BigOlPicturesPartial" />
 }
 
 @section header{
@@ -21,97 +27,86 @@
     </script>
 }
 
-@*Full Page Image Header with Vertically Centered Content*@
-@section masthead{
-    <div class="masthead">
-        <div class="container h-100">
-            <div class="row h-100 align-items-center">
-                <div class="col-12 text-center">
-                    <h1 class="display-3 text-white">@ViewData["Title"]</h1>
-                </div>
-            </div>
+@if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+{
+    <a class="btn btn-egyptianblue m-1" asp-action="Create">Add New Entry</a>
+    <br />
+}
+
+<br />
+
+<div class="container">
+    <h5>Quick filter for data on this page</h5>
+    <input class="form-control" id="demo" type="text" placeholder="Enter your search term here...">
+    <br />
+
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <a class="btn" asp-area="" asp-controller="BioSamples" asp-action="AllData">You can also filter on all Bio Sample data by clicking here</a>
+            </h5>
         </div>
     </div>
 
-    <div class="btn-group special" role="group" aria-label="...">
-        <a class="btn btn-egyptianblue" href="#the-project">About The Project</a>
-        <a class="btn btn-uclagold" asp-area="" asp-controller="Home" asp-action="PDFData">Field Notes and Data</a>
-        <a class="btn btn-cedarchest" asp-area="" asp-controller="Burials" asp-action="Index">Our Database</a>
-        <a class="btn btn-brownsugar" href="https://byu.maps.arcgis.com/apps/CEWebViewer/viewer.html?3dWebScene=b97ad484af45498cacabc2bb9d43390b">Mummy Map</a>
-    </div>
-}
+        <br />
 
-<h1>Bio Samples</h1>
-
-@if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
-{
-    <a class="btn btn-success m-1" asp-action="Create">Add New Entry</a>
-    <br />
-}
-
-<div class="container">
-    <h6>Quick filter for data on this page</h6>
-    <input class="form-control" id="demo" type="text" placeholder="Enter your search term here...">
-    <br />
-    <p>Or, <i>filter on all Exhumation data by <a asp-area="" asp-controller="BioSamples" asp-action="AllData">clicking here</a></i></p>
-    <br />
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>
-                    Rack Number
-                </th>
-                <th>
-                    Burial Subplot
-                </th>
-                <th>
-                    Burial Number
-                </th>
-                <th>
-                    Date
-                </th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody id="test">
-            @foreach (var item in Model.BioSamples)
-            {
+        <table class="table table-bordered table-striped">
+            <thead>
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.RackNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BurialSubplot)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.BurialNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Date)
-                    </td>
-                    <td>
-                        @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
-                        {
-                            <a asp-action="Edit" asp-route-id="@item.BioSampleId" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
-                        }
-
-                        <a asp-action="Details" asp-route-id="@item.BioSampleId" class="btn btn-info m-1" style="width: 80px">Details</a>
-                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                        {
-                            <a asp-action="Delete" asp-route-id="@item.BioSampleId" class="btn btn-danger m-1" style="width: 80px">Delete</a>
-                        }
-                    </td>
+                    <th>
+                        Rack Number
+                    </th>
+                    <th>
+                        Burial Subplot
+                    </th>
+                    <th>
+                        Burial Number
+                    </th>
+                    <th>
+                        Date
+                    </th>
+                    <th></th>
                 </tr>
-            }
-        </tbody>
-    </table>
-</div>
+            </thead>
+            <tbody id="test">
+                @foreach (var item in Model.BioSamples)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.RackNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BurialSubplot)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BurialNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                            {
+                                <a asp-action="Edit" asp-route-id="@item.BioSampleId" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
+                            }
 
-<div class="text-center">
-    <div page-model="@Model.PagingInfo"
-         page-classes-enabled="true"
-         page-class="btn"
-         page-class-normal="btn-outline-dark"
-         page-class-selected="btn-primary"
-         class="btn-group pull-right m-1"></div>
-</div>
+                            <a asp-action="Details" asp-route-id="@item.BioSampleId" class="btn btn-brownsugar m-1" style="width: 80px">Details</a>
+                            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                                <a asp-action="Delete" asp-route-id="@item.BioSampleId" class="btn btn-cedarchest m-1" style="width: 80px">Delete</a>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center">
+        <div page-model="@Model.PagingInfo"
+             page-classes-enabled="true"
+             page-class="btn"
+             page-class-normal="btn-outline-dark"
+             page-class-selected="btn-egyptianblue"
+             class="btn-group pull-right m-1"></div>
+    </div>

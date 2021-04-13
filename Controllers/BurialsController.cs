@@ -50,6 +50,13 @@ namespace Intex.Controllers
             });
         }
 
+        //Page to filter by ALL data in a database
+        [AllowAnonymous]
+        public IActionResult AllData()
+        {
+            return View(_context.Burials);
+        }
+
         // GET: Burials/Details/5
         [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
