@@ -1,0 +1,43 @@
+﻿@{
+    ViewData["Title"] = "Questions and Answers";
+}
+
+@*Display a sexy masthead image to welcome the user to the page*@
+@section masthead{
+    <partial name="_BigOlPicturesPartial" />
+}
+
+<br /> 
+
+<div class="text-center">
+    <h2>Click a button below to see how our data can answer your question:</h2>
+
+    <br />
+
+    <a class="btn btn-egyptianblue" asp-action="AnswersHeadDirection">Did the orientation of the mummies change over time?</a>
+    <br />
+    <br />
+    <a class="btn btn-egyptianblue" asp-action="AnswersAgeWithJewelry">How old were people who were buried with jewelry?</a>
+    <br />
+    <br />
+    <a class="btn btn-uclagold" asp-action="AnswersGenderWithJewelry">Which gender was buried with more jewelry?</a>
+    <br />
+    <br />
+    <a class="btn btn-uclagold" asp-action="AnswersAverageHeight">How tall were the Egyptians that were buried?</a>
+    <br />
+    <br />
+    <a class="btn btn-cedarchest" asp-action="AnswersHairColorByLocation">Were people with similar hair color buried together?</a>
+    <br />
+    <br />
+    <a class="btn btn-cedarchest" asp-action="AnswersBuriedWithTextiles">Show me mummies that were buried with texties.</a>
+    <br />
+    <br />
+    <a class="btn btn-brownsugar" asp-action="AnswersFoundIn2000">Show me all the mummies that were found in the year 2000.</a>
+    <br />
+    <br />
+    <a class="btn btn-brownsugar" asp-action="AnswersOpenCranialSutures">Show me all mummies with open cranial sutures.</a>
+    <br />
+    <br />
+</div>
+
+

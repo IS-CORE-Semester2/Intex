@@ -1,0 +1,55 @@
+﻿@{
+    @model AnswersViewModel
+    ViewData["Title"] = "Mummies Buried With Textiles";
+}
+
+@*Add in these scripts to allow filter box to work*@
+@section header{
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#demo").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#test tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}
+
+<br />
+
+<h1>@ViewData["Title"]</h1>
+
+<br />
+
+@*Search box for filtering, table to display all information*@
+<div class="container">
+    <h6>Quick filter for data on this page</h6>
+    <input class="form-control" id="demo" type="text" placeholder="Enter your search term here...">
+
+    <br />
+
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Location</th>
+                <th>Burial Situation</th>
+            </tr>
+        </thead>
+        <tbody id="test">
+            @foreach (var m in Model.Burials)
+            {
+                <tr>
+                    <td>@m.BurialId</td>
+                    <td>@m.BurialLocation</td>
+                    <td>@m.BurialSituation</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -187,6 +187,102 @@ namespace Intex.Controllers
         {
             return View();
         }
+
+        //Allow people to go to a page to get their questions answered
+        [AllowAnonymous]
+        public IActionResult Questions()
+        {
+            return View();
+        }
+
+
+        [AllowAnonymous]
+        public IActionResult AnswersHeadDirection()
+        {
+            return View(new AnswersViewModel
+            {
+                Burials = _context.Burials
+                    .Where(b => b.HeadDirection != null)
+                    .OrderBy(b => b.BurialDepth)
+                });
+        }
+
+        [AllowAnonymous]
+        public IActionResult AnswersAgeWithJewelry()
+        {
+            return View(new AnswersViewModel
+            {
+                Burials = _context.Burials
+                    .Where(b => b.ArtifactsDescription.Contains("necklace") || b.ArtifactsDescription.Contains("bracelet") || b.ArtifactsDescription.Contains("bead"))
+                    .OrderBy(b => b.EstimateAge)
+            });
+        }
+
+        [AllowAnonymous]
+        public IActionResult AnswersGenderWithJewelry()
+        {
+            return View(new AnswersViewModel
+            {
+                Burials = _context.Burials
+                    .Where(b => b.ArtifactsDescription.Contains("necklace") || b.ArtifactsDescription.Contains("bracelet") || b.ArtifactsDescription.Contains("bead"))
+                    .OrderBy(b => b.GenderGe)
+            });
+        }
+
+        [AllowAnonymous]
+        public IActionResult AnswersAverageHeight()
+        {
+            return View(new AnswersViewModel
+            {
+                Burials = _context.Burials
+                    .OrderBy(b => b.EstimateLivingStature)
+                    .Where(b => b.EstimateLivingStature != null)
+            });
+        }
+
+        [AllowAnonymous]
+        public IActionResult AnswersHairColorByLocation()
+        {
+            return View(new AnswersViewModel
+            {
+                Burials = _context.Burials
+                    .Where(b => b.HairColor != null)
+                    .OrderBy(b => b.BurialLocation).ThenBy(b => b.BurialDepth)
+            });
+        }
+
+        [AllowAnonymous]
+        public IActionResult AnswersBuriedWithTextiles()
+        {
+            return View(new AnswersViewModel
+            {
+                Burials = _context.Burials
+                    .Where(b => b.BurialSituation.Contains("textile"))
+                    .OrderBy(b => b.GenderGe)
+            });
+        }
+
+        [AllowAnonymous]
+        public IActionResult AnswersFoundIn2000()
+        {
+            return View(new AnswersViewModel
+            {
+                Burials = _context.Burials
+                    .Where(b => b.YearFound.Contains("2000"))
+                    .OrderBy(b => b.BurialDepth)
+            });
+        }
+
+        [AllowAnonymous]
+        public IActionResult AnswersOpenCranialSutures()
+        {
+            return View(new AnswersViewModel
+            {
+                Burials = _context.Burials
+                    .Where(b => b.CranialSuture.Contains("Open"))
+                    .OrderBy(b => b.BurialDepth)
+            });
+        }
     }
 }
 
