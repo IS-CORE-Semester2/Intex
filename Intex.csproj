@@ -8,6 +8,8 @@
   <ItemGroup>
     <Compile Remove="Data\Migrations\20210408220946_NewTable.cs" />
     <Compile Remove="Data\Migrations\20210408220946_NewTable.Designer.cs" />
+    <Compile Remove="Data\Migrations\20210412214312_Exhumation.cs" />
+    <Compile Remove="Data\Migrations\20210412214312_Exhumation.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="wwwroot\img\Exhumations\" />
     <Folder Include="wwwroot\pdf\Archaeological Database Articles\" />
     <Folder Include="wwwroot\pdf\Field Books\" />
     <Folder Include="wwwroot\pdf\Misc Data\" />

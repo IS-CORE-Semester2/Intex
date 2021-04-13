@@ -88,6 +88,7 @@ namespace Intex.Controllers
             return View(_context.PDFFiles);
         }
 
+
         [HttpGet]
         public IActionResult PDFDataUpload(int fileId, string category)
         {

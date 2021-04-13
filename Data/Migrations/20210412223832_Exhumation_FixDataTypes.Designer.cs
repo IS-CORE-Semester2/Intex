@@ -4,14 +4,16 @@ using Intex.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Intex.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210412223832_Exhumation_FixDataTypes")]
+    partial class Exhumation_FixDataTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -510,8 +512,8 @@ namespace Intex.Data.Migrations
                     b.Property<string>("ExcavationRecorder")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Hair")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool?>("Hair")
+                        .HasColumnType("bit");
 
                     b.Property<int>("HighPairEW")
                         .HasColumnType("int");

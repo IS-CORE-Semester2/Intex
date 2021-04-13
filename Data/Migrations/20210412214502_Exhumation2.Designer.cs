@@ -4,14 +4,16 @@ using Intex.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Intex.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210412214502_Exhumation2")]
+    partial class Exhumation2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -504,14 +506,14 @@ namespace Intex.Data.Migrations
                     b.Property<DateTime?>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<float>("DepthInMeters")
-                        .HasColumnType("real");
+                    b.Property<int>("DepthInMeters")
+                        .HasColumnType("int");
 
                     b.Property<string>("ExcavationRecorder")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Hair")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool?>("Hair")
+                        .HasColumnType("bit");
 
                     b.Property<int>("HighPairEW")
                         .HasColumnType("int");
@@ -519,8 +521,8 @@ namespace Intex.Data.Migrations
                     b.Property<int>("HighPairNS")
                         .HasColumnType("int");
 
-                    b.Property<float>("LengthInMeters")
-                        .HasColumnType("real");
+                    b.Property<int>("LengthInMeters")
+                        .HasColumnType("int");
 
                     b.Property<int>("LowPairEW")
                         .HasColumnType("int");
@@ -531,23 +533,23 @@ namespace Intex.Data.Migrations
                     b.Property<string>("PhotoPath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ShaftNumber")
+                    b.Property<string>("ShaftNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SouthToFeetInMeters")
                         .HasColumnType("int");
 
-                    b.Property<float>("SouthToFeetInMeters")
-                        .HasColumnType("real");
-
-                    b.Property<float>("SouthToHeadInMeters")
-                        .HasColumnType("real");
+                    b.Property<int>("SouthToHeadInMeters")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("Time")
                         .HasColumnType("datetime2");
 
-                    b.Property<float>("WestToFeetInMeters")
-                        .HasColumnType("real");
+                    b.Property<int>("WestToFeetInMeters")
+                        .HasColumnType("int");
 
-                    b.Property<float>("WestToHeadInMeters")
-                        .HasColumnType("real");
+                    b.Property<int>("WestToHeadInMeters")
+                        .HasColumnType("int");
 
                     b.HasKey("BurialID");
 

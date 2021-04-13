@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Intex.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,6 +17,7 @@ namespace Intex.ViewModels
         public List<Cranial2002> Cranial2002s { get; set; }
         public List<OracleSpreads> OracleSpreads { get; set; }
         public List<C14Data> C14Datas { get; set; }
+        public List<Exhumation> Exhumations { get; set; }
 
         //this one is used to set how many pages there are
         public PagingInfo PagingInfo { get; set; }

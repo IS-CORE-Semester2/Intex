@@ -21,7 +21,7 @@
     </script>
 }
 
-<h1>Bio Samples</h1>
+<h1>Filter by ALL Bio Sample Data</h1>
 
 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
 {
@@ -29,9 +29,7 @@
     <br />
 }
 
-
 <div class="container">
-    <h6>Filter by ALL Bio Samples Data</h6>
     <input class="form-control" id="demo" type="text" placeholder="Enter your search term here...">
     <br>
     <table class="table table-bordered table-striped">
