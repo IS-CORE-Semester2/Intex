@@ -12,6 +12,10 @@
 
 <div class="text-center">
     <img class="img-fluid" src="@photoPath" asp-append-version="true" />
+    @if (photoPath == "~/img/Exhumations/noimage.png")
+    {
+        <p class="text-danger">No image has been saved for this entry</p>
+    }
 </div>
 
 <div>

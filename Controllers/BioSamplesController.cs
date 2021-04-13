@@ -12,28 +12,27 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Intex.Controllers
 {
+    //lock down controller so only admins and researchers can access MOST actions.
+    //other actions can be unlocked by adding the "AllowAnonymous" tag helper
     [Authorize(Roles = "Admin,Researcher")]
     public class BioSamplesController : Controller
     {
         private readonly BioSamplesDbContext _context;
 
+        //add in the context file
         public BioSamplesController(BioSamplesDbContext context)
         {
             _context = context;
         }
 
-        // GET: BioSamples
-        //public async Task<IActionResult> Index()
-        //{
-        //    var bioSamplesDbContext = _context.BioSamples.Include(b => b.Burial);
-        //    return View(await bioSamplesDbContext.ToListAsync());
-        //}
-
+        //unlock the index page for anonymous users
+        //include pagination
         [AllowAnonymous]
         public IActionResult Index(int pageNum = 1)
         {
             int pageSize = 10;
 
+            //create a new index view model to handle the DBSet and pagination
             return View(new IndexViewModel
             {
                 BioSamples = _context.BioSamples

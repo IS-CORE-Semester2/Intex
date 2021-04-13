@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Intex.Controllers
 {
+    //lock down controller so only admins and researchers can access MOST actions.
+    //other actions can be unlocked by adding the "AllowAnonymous" tag helper
     [Authorize(Roles = "Admin,Researcher")]
     public class C14DataController : Controller
     {
@@ -21,12 +23,9 @@ namespace Intex.Controllers
         {
             _context = context;
         }
-
-        //// GET: C14Data
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.C14Data.ToListAsync());
-        //}
+        
+        //allow anonymous users access to the index page
+        //set up pagination
         [AllowAnonymous]
         public IActionResult Index(int pageNum = 1)
         {
@@ -34,6 +33,7 @@ namespace Intex.Controllers
 
             return View(new IndexViewModel
             {
+                //create a new index view model to handle the DBSet and pagination
                 C14Datas = _context.C14Data
                     .Skip((pageNum - 1) * pageSize)
                     .Take(pageSize)

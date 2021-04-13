@@ -12,26 +12,26 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Intex.Controllers
 {
+    //lock down controller so only admins and researchers can access MOST actions.
+    //other actions can be unlocked by adding the "AllowAnonymous" tag helper
     [Authorize(Roles = "Admin,Researcher")]
     public class Cranial2002Controller : Controller
     {
         private readonly Cranial2002DbContext _context;
 
+        //pull in context file to allow us to use the database
         public Cranial2002Controller(Cranial2002DbContext context)
         {
             _context = context;
         }
 
-        //// GET: Cranial2002
-        //public async Task<IActionResult> Index()
-        //{
-        //    return View(await _context.Cranial2002.ToListAsync());
-        //}
+        //Allow anonymous access to this action
         [AllowAnonymous]
         public IActionResult Index(int pageNum = 1)
         {
             int pageSize = 10;
 
+            //create a new index view model to handle the DBSet and pagination
             return View(new IndexViewModel
             {
                 Cranial2002s = _context.Cranial2002
