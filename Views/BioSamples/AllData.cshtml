@@ -23,11 +23,6 @@
 
 <h1>Filter by ALL Bio Sample Data</h1>
 
-@if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
-{
-    <a class="btn btn-success m-1" asp-action="Create">Add New Entry</a>
-    <br />
-}
 
 <div class="container">
     <input class="form-control" id="demo" type="text" placeholder="Enter your search term here...">

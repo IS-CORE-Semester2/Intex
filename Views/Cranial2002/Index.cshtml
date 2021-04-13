@@ -6,6 +6,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section header{
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#demo").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#test tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}
+
 <h1>Cranial Data</h1>
 
 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
@@ -14,93 +29,97 @@
     <br />
 }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Maximum Cranial Length
-            </th>
-            <th>
-                Maximum Cranial Breadth
-            </th>
-            <th>
-                Burial Positioning North South Number
-            </th>
-            <th>
-                Burial Positioning North South Direction
-            </th>
-            <th>
-                Burial Positioning East West Number
-            </th>
-            <th>
-                Burial Positioning East West Direction
-            </th>
-            <th>
-                Burial Number
-            </th>
-            <th>
-                Burial Depth
-            </th>
-            <th>
-                Burial Sub Plot Direction
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Cranial2002s)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaximumCranialLength)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MaximumCranialBreadth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialPositioningNorthSouthNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialPositioningNorthSouthDirection)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialPositioningEastWestNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialPositioningEastWestDirection)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialDepth)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BurialSubPlotDirection)
-            </td>
-            <td>
-                @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
-                {
-                    <a asp-action="Edit" asp-route-id="@item.SampleNumber" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
-                }
+<div class="container">
+    <h6>Quick filter for data on this page</h6>
+    <input class="form-control" id="demo" type="text" placeholder="Enter your search term here...">
+    <br>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>
+                    Maximum Cranial Length
+                </th>
+                <th>
+                    Maximum Cranial Breadth
+                </th>
+                <th>
+                    Burial Positioning North South Number
+                </th>
+                <th>
+                    Burial Positioning North South Direction
+                </th>
+                <th>
+                    Burial Positioning East West Number
+                </th>
+                <th>
+                    Burial Positioning East West Direction
+                </th>
+                <th>
+                    Burial Number
+                </th>
+                <th>
+                    Burial Depth
+                </th>
+                <th>
+                    Burial Sub Plot Direction
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="test">
+            @foreach (var item in Model.Cranial2002s)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaximumCranialLength)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MaximumCranialBreadth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BurialPositioningNorthSouthNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BurialPositioningNorthSouthDirection)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BurialPositioningEastWestNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BurialPositioningEastWestDirection)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BurialNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BurialDepth)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BurialSubPlotDirection)
+                    </td>
+                    <td>
+                        @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.SampleNumber" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
+                        }
 
-                <a asp-action="Details" asp-route-id="@item.SampleNumber" class="btn btn-info m-1" style="width: 80px">Details</a>
-                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
-                {
-                    <a asp-action="Delete" asp-route-id="@item.SampleNumber" class="btn btn-danger m-1" style="width: 80px">Delete</a>
-                }
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
-
+                        <a asp-action="Details" asp-route-id="@item.SampleNumber" class="btn btn-info m-1" style="width: 80px">Details</a>
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.SampleNumber" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 
 <div class="text-center">
     <div page-model="@Model.PagingInfo"
-         page-classes-enabled="true"
-         page-class="btn"
-         page-class-normal="btn-outline-dark"
-         page-class-selected="btn-primary"
-         class="btn-group pull-right m-1"></div>
+            page-classes-enabled="true"
+            page-class="btn"
+            page-class-normal="btn-outline-dark"
+            page-class-selected="btn-primary"
+            class="btn-group pull-right m-1"></div>
 </div>

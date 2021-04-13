@@ -2,7 +2,7 @@
 @inject SignInManager<IdentityUser> signInManager;
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Exhumations";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -34,7 +34,7 @@
     <input class="form-control" id="demo" type="text" placeholder="Enter your search term here...">
     <br />
     <p>Or, <i>filter on all Exhumation data by <a asp-area="" asp-controller="Exhumations" asp-action="AllData">clicking here</a></i></p>
-    <br>
+    <br />
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
@@ -80,9 +80,16 @@
                         @Html.DisplayFor(modelItem => item.BurialMaterials)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.BurialID" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
+                        @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.BurialID" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
+                        }
+
                         <a asp-action="Details" asp-route-id="@item.BurialID" class="btn btn-info m-1" style="width: 80px">Details</a>
-                        <a asp-action="Delete" asp-route-id="@item.BurialID" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.BurialID" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                        }
                     </td>
                 </tr>
             }

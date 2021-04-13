@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<Intex.Models.Exhumation>
+@inject SignInManager<IdentityUser> signInManager;
+
 
 @{
     ViewData["Title"] = "Index";
@@ -173,12 +175,23 @@
                         @Html.DisplayFor(modelItem => item.Time)
                     </td>
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.BurialID" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
+                        @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.BurialID" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
+                        }
+
                         <a asp-action="Details" asp-route-id="@item.BurialID" class="btn btn-info m-1" style="width: 80px">Details</a>
-                        <a asp-action="Delete" asp-route-id="@item.BurialID" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.BurialID" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                        }
                     </td>
                 </tr>
             }
         </tbody>
     </table>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary m-1">Back to List</a>
 </div>

@@ -6,7 +6,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Carbon Dating</h1>
+@section header{
+    <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#demo").on("keyup", function () {
+                var value = $(this).val().toLowerCase();
+                $("#test tr").filter(function () {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
+}
+
+<h1>Carbon Dating Data</h1>
 
 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
 {
@@ -14,103 +29,116 @@
     <br />
 }
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Rack</th>
-            <th>Square</th>
-            <th>Description</th>
-            <th>Location</th>
-            <th>Calibrated 95 Calendar Date Avg</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.C14Datas) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rack)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NorthSouthNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NorthSouthLetter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EastWestNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EastWestLetter)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Square)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Area)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TubeNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SizeMl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Foci)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.C14Sample2017)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Location)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuestionS)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.OtherNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Conventional14cAgeBp)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item._14cCalendarDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateMax)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateMin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateSpan)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateAvg)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Notes)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.BurialNumber">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.BurialNumber">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.BurialNumber">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="container">
+    <h6>Quick filter for data on this page</h6>
+    <input class="form-control" id="demo" type="text" placeholder="Enter your search term here...">
+    <br />
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Rack</th>
+                <th>Square</th>
+                <th>Description</th>
+                <th>Location</th>
+                <th>Calibrated 95 Calendar Date Avg</th>
+            </tr>
+        </thead>
+        <tbody id="test">
+            @foreach (var item in Model.C14Datas)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rack)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NorthSouthNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NorthSouthLetter)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EastWestNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EastWestLetter)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Square)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Area)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TubeNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SizeMl)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Foci)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.C14Sample2017)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Location)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuestionS)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OtherNumber)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Conventional14cAgeBp)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item._14cCalendarDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateMax)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateMin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateSpan)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateAvg)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Notes)
+                    </td>
+                    <td>
+                        @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                        {
+                            <a asp-action="Edit" asp-route-id="@item.BurialNumber" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
+                        }
 
-<div class="text-center">
-    <div page-model="@Model.PagingInfo"
-         page-classes-enabled="true"
-         page-class="btn"
-         page-class-normal="btn-outline-dark"
-         page-class-selected="btn-primary"
-         class="btn-group pull-right m-1"></div>
+                        <a asp-action="Details" asp-route-id="@item.BurialNumber" class="btn btn-info m-1" style="width: 80px">Details</a>
+                        @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                        {
+                            <a asp-action="Delete" asp-route-id="@item.BurialNumber" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                        }
+                    </td>                
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
+
+    <div class="text-center">
+        <div page-model="@Model.PagingInfo"
+             page-classes-enabled="true"
+             page-class="btn"
+             page-class-normal="btn-outline-dark"
+             page-class-selected="btn-primary"
+             class="btn-group pull-right m-1"></div>
+    </div>

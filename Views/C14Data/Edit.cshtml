@@ -1,11 +1,13 @@
 ﻿@model Intex.C14Data
+@inject SignInManager<IdentityUser> signInManager;
+
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit C14 Entry</h1>
+<h1>Edit Carbon Dating Entry</h1>
 
 <hr />
 <div class="row">
@@ -129,7 +131,10 @@
                 <span asp-validation-for="Notes" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                {
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                }
                 <a asp-action="Index" class="btn btn-secondary m-1">Back to List</a>
             </div>
         </form>
