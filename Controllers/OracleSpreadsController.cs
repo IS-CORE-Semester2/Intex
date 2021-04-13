@@ -175,5 +175,13 @@ namespace Intex.Controllers
         {
             return _context.OracleSpread.Any(e => e.Gamous == id);
         }
+
+        //tableau stuff
+        public IActionResult Visualization()
+        {
+            return View();
+
+
+        }
     }
 }

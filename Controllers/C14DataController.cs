@@ -175,5 +175,13 @@ namespace Intex.Controllers
         {
             return _context.C14Data.Any(e => e.BurialNumber == id);
         }
+
+        //tableau stuff
+        public IActionResult Visualization()
+        {
+            return View();
+
+
+        }
     }
 }

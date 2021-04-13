@@ -177,5 +177,15 @@ namespace Intex.Controllers
         {
             return _context.Burials.Any(e => e.BurialId == id);
         }
+
+        //tableau stuff
+        public IActionResult Visualization()
+        {
+            return View();
+
+
+        }
     }
 }
+
+

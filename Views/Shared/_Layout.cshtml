@@ -43,6 +43,15 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="C14Data" asp-action="Index">Carbon Dating</a>
                             </div>
                         </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Visualizations</a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropownMenuLink">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Burials" asp-action="Visualization">Burials</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Cranial2002" asp-action="Visualization">Cranial Data</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="OracleSpreads" asp-action="Visualization">Oracle Spreadsheet</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="C14Data" asp-action="Visualization">Carbon Dating</a>
+                            </div>
+                        </li>
                         @*If a user is logged in AND they are an admin, give them access to the admin tab*@
                         @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
