@@ -6,6 +6,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section masthead{
+    <partial name="_BigOlPicturesPartial" />
+}
+
 @section header{
     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -21,13 +25,14 @@
     </script>
 }
 
-<h1>Old Oracle Spreadsheet Data</h1>
-
 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
 {
-    <a class="btn btn-success m-1" asp-action="Create">Add New Entry</a>
+    <a class="btn btn-egyptianblue m-1" asp-action="Create">Add New Entry</a>
     <br />
 }
+
+<br />
+
 
 <div class="container">
     <h6>Quick filter for data on this page</h6>
@@ -87,10 +92,10 @@
                             <a asp-action="Edit" asp-route-id="@item.Gamous" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
                         }
 
-                        <a asp-action="Details" asp-route-id="@item.Gamous" class="btn btn-info m-1" style="width: 80px">Details</a>
+                        <a asp-action="Details" asp-route-id="@item.Gamous" class="btn btn-brownsugar m-1" style="width: 80px">Details</a>
                         @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                         {
-                            <a asp-action="Delete" asp-route-id="@item.Gamous" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                            <a asp-action="Delete" asp-route-id="@item.Gamous" class="btn btn-cedarchest m-1" style="width: 80px">Delete</a>
                         }
                     </td>
                 </tr>
@@ -99,11 +104,11 @@
     </table>
 </div>
 
-    <div class="text-center">
-        <div page-model="@Model.PagingInfo"
-             page-classes-enabled="true"
-             page-class="btn"
-             page-class-normal="btn-outline-dark"
-             page-class-selected="btn-primary"
-             class="btn-group pull-right m-1"></div>
-    </div>
+<div class="text-center">
+    <div page-model="@Model.PagingInfo"
+         page-classes-enabled="true"
+         page-class="btn"
+         page-class-normal="btn-outline-dark"
+         page-class-selected="btn-primary"
+         class="btn-group pull-right m-1"></div>
+</div>

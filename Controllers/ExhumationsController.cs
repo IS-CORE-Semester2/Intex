@@ -76,22 +76,6 @@ namespace Intex
             return View();
         }
 
-        // POST: Exhumations/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public async Task<IActionResult> Create([Bind("BurialID,LowPairNS,HighPairNS,BurialLocationNS,LowPairEW,HighPairEW,BurialLocationEW,Area,ShaftNumber,BurialNumber,SouthToHeadInMeters,SouthToFeetInMeters,WestToHeadInMeters,WestToFeetInMeters,LengthInMeters,DepthInMeters,PhotoPath,BurialGoods,Hair,Age,BurialMaterials,ExcavationRecorder,Date,Time")] Exhumation exhumation)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _context.Add(exhumation);
-        //        await _context.SaveChangesAsync();
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    return View(exhumation);
-        //}
-
         [HttpPost]
         public IActionResult Create(ExhumationCreateViewModel model)
         {
@@ -194,6 +178,7 @@ namespace Intex
             return View(exhumation);
         }
 
+        [AllowAnonymous]
         //Page to filter by ALL data in a database
         public IActionResult AllData()
         {

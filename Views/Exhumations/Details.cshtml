@@ -154,7 +154,7 @@
 <div>
     @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
     {
-        <a asp-action="Edit" asp-route-id="@Model.BurialID" class="btn btn-info m-1">Edit</a>
+        <a asp-action="Edit" asp-route-id="@Model.BurialID" class="btn btn-brownsugar m-1">Edit</a>
 
     }
     <a asp-action="Index" class="btn btn-secondary m-1">Back to List</a>
