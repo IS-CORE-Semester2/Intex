@@ -41,31 +41,38 @@
     <tbody>
         @foreach (var item in Model.OracleSpreads)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.BurialSquare)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nors)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Sq2)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Eorw)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Area)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Burialnum)
-                </td>
-                <td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BurialSquare)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sq2)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Eorw)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Burialnum)
+            </td>
+            <td>
+                @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                {
                     <a asp-action="Edit" asp-route-id="@item.Gamous" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
-                    <a asp-action="Details" asp-route-id="@item.Gamous" class="btn btn-info m-1" style="width: 80px">Details</a>
+                }
+
+                <a asp-action="Details" asp-route-id="@item.Gamous" class="btn btn-info m-1" style="width: 80px">Details</a>
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
                     <a asp-action="Delete" asp-route-id="@item.Gamous" class="btn btn-danger m-1" style="width: 80px">Delete</a>
-                </td>
-            </tr>
+                }
+            </td>
+        </tr>
         }
     </tbody>
 </table>
