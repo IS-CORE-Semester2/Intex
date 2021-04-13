@@ -6,6 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<<<<<<< Updated upstream
 @section header{
     <script src="https://code.jquery.com/jquery-2.2.4.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -22,6 +23,9 @@
 }
 
 <h1>Bio Sample Data</h1>
+=======
+<h1>Bio Samples</h1>
+>>>>>>> Stashed changes
 
 @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
 {
@@ -38,6 +42,7 @@
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
+<<<<<<< Updated upstream
                 <th>
                     Rack Number
                 </th>
@@ -51,6 +56,32 @@
                     Date
                 </th>
                 <th></th>
+=======
+                <td>
+                    @Html.DisplayFor(modelItem => item.RackNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialSubplot)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BurialNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @if (signInManager.IsSignedIn(User) && (User.IsInRole("Admin") || (User.IsInRole("Researcher"))))
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.BioSampleId" class="btn btn-secondary m-1" style="width: 80px">Edit</a>
+                    }
+
+                    <a asp-action="Details" asp-route-id="@item.BioSampleId" class="btn btn-info m-1" style="width: 80px">Details</a>
+                    @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        <a asp-action="Delete" asp-route-id="@item.BioSampleId" class="btn btn-danger m-1" style="width: 80px">Delete</a>
+                    }
+                </td>
+>>>>>>> Stashed changes
             </tr>
         </thead>
         <tbody id="test">
