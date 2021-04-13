@@ -9,9 +9,11 @@ using Intex.Models;
 using Intex.ViewModels;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Intex
 {
+    [Authorize(Roles = "Admin,Researcher")]
     public class ExhumationsController : Controller
     {
         private readonly ExhumationDbContext _context;
@@ -28,7 +30,7 @@ namespace Intex
         //{
         //    return View(await _context.Exhumations.ToListAsync());
         //}
-
+        [AllowAnonymous]
         public IActionResult Index(int pageNum = 1)
         {
             int pageSize = 10;
@@ -50,6 +52,7 @@ namespace Intex
         }
 
         // GET: Exhumations/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -198,6 +201,7 @@ namespace Intex
         }
 
         // GET: Exhumations/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -218,6 +222,7 @@ namespace Intex
         // POST: Exhumations/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var exhumation = await _context.Exhumations.FindAsync(id);

@@ -37,10 +37,16 @@
         <thead>
             <tr>
                 <th>Rack</th>
-                <th>Square</th>
-                <th>Description</th>
-                <th>Location</th>
-                <th>Calibrated 95 Calendar Date Avg</th>
+                <th>North South Number</th>
+                <th>North South Letter</th>
+                <th>East West Number</th>
+                <td>East West Letter</td>
+                <td>Square</td>
+                <td>Description</td>
+                <td>Location</td>
+                <td>Category</td>
+                <td>Notes</td>
+                <th></th>
             </tr>
         </thead>
         <tbody id="test">
@@ -66,49 +72,10 @@
                         @Html.DisplayFor(modelItem => item.Square)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Area)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.TubeNumber)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Description)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.SizeMl)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Foci)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.C14Sample2017)
-                    </td>
-                    <td>
                         @Html.DisplayFor(modelItem => item.Location)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.QuestionS)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.OtherNumber)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Conventional14cAgeBp)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item._14cCalendarDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateMax)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateMin)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateSpan)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Calibrated95CalendarDateAvg)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Category)
@@ -133,11 +100,11 @@
     </table>
 </div>
 
-    <div class="text-center">
-        <div page-model="@Model.PagingInfo"
-             page-classes-enabled="true"
-             page-class="btn"
-             page-class-normal="btn-outline-dark"
-             page-class-selected="btn-primary"
-             class="btn-group pull-right m-1"></div>
-    </div>
+<div class="text-center">
+    <div page-model="@Model.PagingInfo"
+            page-classes-enabled="true"
+            page-class="btn"
+            page-class-normal="btn-outline-dark"
+            page-class-selected="btn-primary"
+            class="btn-group pull-right m-1"></div>
+</div>

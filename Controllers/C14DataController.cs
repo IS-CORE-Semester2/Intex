@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Intex;
 using Intex.Models;
 using Intex.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Intex.Controllers
 {
+    [Authorize(Roles = "Admin,Researcher")]
     public class C14DataController : Controller
     {
         private readonly C14DataDbContext _context;
@@ -25,7 +27,7 @@ namespace Intex.Controllers
         //{
         //    return View(await _context.C14Data.ToListAsync());
         //}
-
+        [AllowAnonymous]
         public IActionResult Index(int pageNum = 1)
         {
             int pageSize = 10;
@@ -47,6 +49,7 @@ namespace Intex.Controllers
         }
 
         // GET: C14Data/Details/5
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -138,6 +141,7 @@ namespace Intex.Controllers
         }
 
         // GET: C14Data/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -158,6 +162,7 @@ namespace Intex.Controllers
         // POST: C14Data/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var c14Data = await _context.C14Data.FindAsync(id);
